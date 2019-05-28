@@ -1655,7 +1655,7 @@ SnapSerializer.prototype.openProject = function (project, ide) {
     ide.world().keyboardFocus = project.stage;
 };
 
-SnapSerializer.prototype.loadHelpScreen = function (xmlString) {
+SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
     // public - answer the HelpScreenMorph represented by xmlString
     var myself = this, box,
         model = this.parse(xmlString),
@@ -1666,7 +1666,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString) {
         throw 'Module uses newer version of Serializer';
     }
     model.children.forEach(function (child) {
-        var morph = myself.loadHelpScreenElement(child, screen);
+        var morph = myself.loadHelpScreenElement(child, screen, target);
         if (morph) {
             screen.add(morph);
         }
@@ -1675,7 +1675,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString) {
     return screen;
 };
 
-SnapSerializer.prototype.loadHelpScreenElement = function (element, screen) {
+SnapSerializer.prototype.loadHelpScreenElement = function (element, screen, target) {
     var myself = this, morph;
 
     switch (element.tag) {
@@ -1691,15 +1691,18 @@ SnapSerializer.prototype.loadHelpScreenElement = function (element, screen) {
     case 'p':
         morph = screen.createParagraph(element.contents);
         break;
+    case 'script':
+        morph = this.loadScript(element, target);
+        break;
     }
     if (morph) {
         element.children.forEach(function (child) {
-            var childMorph = myself.loadHelpScreenElement(child, screen);
+            var childMorph = myself.loadHelpScreenElement(child, screen, target);
             if (childMorph) {
                 morph.add(childMorph);
             }
         });
-        if (element.tag !== 'box') {
+        if (element.tag === 'column' || element.tag === 'row') {
             morph.setPosition(new Point(
                 HelpScreenMorph.prototype.padding,
                 HelpScreenMorph.prototype.padding
