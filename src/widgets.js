@@ -2815,7 +2815,7 @@ function AlignmentMorph(orientation, padding) {
 AlignmentMorph.prototype.init = function (orientation, padding) {
     // additional properties:
     this.orientation = orientation || 'row'; // or 'column'
-    this.alignment = 'center'; // or 'left' in a column
+    this.alignment = 'center'; // or 'left' in a column / 'top' in a row
     this.padding = padding || 0;
     this.respectHiddens = false;
 
@@ -2849,7 +2849,9 @@ AlignmentMorph.prototype.fixLayout = function () {
                     c.setPosition(
                         lfb.topRight().add(new Point(
                             this.padding,
-                            (lfb.height() - cfb.height()) / 2
+                            this.alignment === 'center' ?
+                                    (lfb.height() - cfb.height()) / 2
+                                            : 0
                         ))
                     );
                 } else { // orientation === 'column'
