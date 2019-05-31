@@ -1701,6 +1701,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
                 morph.silentSetWidth(morph.relativeWidth
                     / parent.relWidthDenominator
                     * (parent.width() - parent.usedWidth));
+                console.log(morph.width());
             } else {
                 morph.silentSetWidth(parent.width() - 2 * padding);
             }
@@ -1711,7 +1712,21 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
                 && morph.orientation === 'row'
             ) {
                 // calculate the total known used width of row items
-                morph.usedWidth = padding * (morph.children.length - 1);
+                morph.usedWidth = padding * (morph.children.length - 1)
+                    + morph.children.reduce(
+                        function (width, child) {
+                            if (
+                                child instanceof AlignmentMorph
+                                || child instanceof ScriptDiagramMorph
+                                || child instanceof TextMorph
+                            ) {
+                                return width;
+                            } else {
+                                return width + child.width();
+                            }
+                        }, 0
+                    );
+                console.log(morph.usedWidth);
                 morph.relWidthDenominator = morph.children.reduce(
                     function (width, child) {
                         return width + (child.relativeWidth || 0)
@@ -1810,6 +1825,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         if (+element.attributes['rel-width']) {
             // width will be adjusted later
             morph.relativeWidth = +element.attributes['rel-width'];
+            console.log(+element.attributes['rel-width']);
         }
         if (
             !(morph instanceof RichTextMorph
