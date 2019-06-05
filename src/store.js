@@ -1673,7 +1673,14 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
         throw 'Module uses newer version of Serializer';
     }
     model.children.forEach(function (child) {
-        if (child.tag !== 'thumbnail') {
+        if (child.tag === 'thumbnail') {
+            screen.thumbnail = myself.loadHelpScreenElement(
+                model.require('thumbnail'), screen, target, 'black'
+            );
+        } else if (child.tag === 'blocks') {
+            myself.loadCustomBlocks(target, child);
+            myself.populateCustomBlocks(target, child);
+        } else {
             var morph = myself.loadHelpScreenElement(
                 child, screen, target,
                 child.attributes.color === 'blue' ? 'black' : 'white'
@@ -1689,17 +1696,26 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
         if (morph instanceof BoxMorph) {
             morph.setWidth(parent.width() - padding);
         } else if (
+            morph instanceof AlignmentMorph &&
+            parent instanceof BoxMorph
+        ) {
+            morph.silentSetWidth(parent.width() - 2 * padding);
+        } else if (
             morph instanceof AlignmentMorph
             || morph instanceof ScriptDiagramMorph
             || morph instanceof TextMorph
         ) {
             if (morph.relativeWidth) {
-                morph.silentSetWidth(morph.relativeWidth
-                    / parent.relWidthDenominator
-                    * (parent.width() - parent.usedWidth));
-                console.log(morph.width());
+                morph.silentSetWidth(
+                    morph.relativeWidth / parent.relWidthDenominator
+                    * (parent.width() - parent.usedWidth)
+                );
             } else {
-                morph.silentSetWidth(parent.width() - 2 * padding);
+                if (parent.alignment === 'row') {
+                    morph.silentSetWidth(parent.width() - padding);
+                } else {
+                    morph.silentSetWidth(parent.width());
+                }
             }
         }
         if (morph instanceof AlignmentMorph || morph instanceof BoxMorph) {
@@ -1717,12 +1733,13 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
                                 || child instanceof TextMorph
                             ) {
                                 return width;
+                            } else if (child instanceof BlockMorph) {
+                                return width + child.stackFullBounds().width();
                             } else {
                                 return width + child.width();
                             }
                         }, 0
                     );
-                console.log(morph.usedWidth);
                 morph.relWidthDenominator = morph.children.reduce(
                     function (width, child) {
                         return width + (child.relativeWidth || 0)
@@ -1748,10 +1765,6 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
             child.fixLayout();
         }
     });
-
-    screen.thumbnail = this.loadHelpScreenElement(
-        model.require('thumbnail'), screen, target, 'black'
-    );
     screen.add(screen.thumbnail);
 
     return screen;
@@ -1760,9 +1773,16 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
 SnapSerializer.prototype.loadHelpScreenElement = function (
     element, screen, target, textColor
 ) {
-    var myself = this, morph, textSize;
+    var myself = this, morph, customBlock, script, textSize;
 
     switch (element.tag) {
+    case 'block-definition':
+        customBlock = detect(target.customBlocks, function (block) {
+            return block.blockSpec() === element.attributes.s;
+        });
+        morph = new PrototypeHatBlockMorph(customBlock);
+        morph.nextBlock(customBlock.body.expression);
+        break;
     case 'box':
         morph = screen.createBox(element.attributes.color);
         break;
@@ -1770,15 +1790,24 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         morph = screen.createColumn();
         break;
     case 'diagram':
+        if (element.childNamed('block-definition')) {
+            script = myself.loadHelpScreenElement(
+                element.childNamed('block-definition'),
+                screen, target, textColor
+            );
+        } else {
+            script = this.loadScript(element.require('script'), target);
+        }
         morph = screen.createScriptDiagram(
-            this.loadScript(element.require('script'), target),
+            script,
             element.require('annotations').children.map(function (child) {
                 var morph = myself.loadHelpScreenElement(
                     child, screen, target, textColor
                 );
                 morph.arrowReverse = !!child.attributes['arrow-reverse'];
                 return morph;
-            })
+            }),
+            textColor
         );
         break;
     case 'img':
@@ -1803,7 +1832,6 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
                     child, screen, target, textColor
                 );
             });
-            console.log(morph);
             morph.drawNew();
         }
         break;
@@ -1820,14 +1848,20 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         break;
     }
     if (morph) {
-        if (+element.attributes['rel-width']) {
+        if (element.attributes['rel-width']) {
             // width will be adjusted later
             morph.relativeWidth = +element.attributes['rel-width'];
-            console.log(+element.attributes['rel-width']);
+        }
+        if (
+            morph instanceof AlignmentMorph
+            && element.attributes.padding
+        ) {
+            morph.padding = +element.attributes.padding;
         }
         if (
             !(morph instanceof RichTextMorph
-            || morph instanceof ScriptDiagramMorph)
+            || morph instanceof ScriptDiagramMorph
+            || morph instanceof BlockMorph)
         ) {
             // add children
             element.children.forEach(function (child) {
