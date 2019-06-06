@@ -1320,7 +1320,7 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object) {
         input.annotation = +model.attributes['annotation'];
     }
     if (model.attributes['menu']) {
-        nextBlock.menuAnnotation = +child.attributes['menu'];
+        input.menuAnnotation = +model.attributes['menu'];
     }
 };
 
@@ -1734,7 +1734,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
                 && morph.orientation === 'row'
             ) {
                 // calculate the total known used width of row items
-                morph.usedWidth = padding * (morph.children.length - 1)
+                morph.usedWidth = padding * morph.children.length
                     + morph.children.reduce(
                         function (width, child) {
                             if (
@@ -1783,7 +1783,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, target) {
 SnapSerializer.prototype.loadHelpScreenElement = function (
     element, screen, target, textColor
 ) {
-    var myself = this, morph, customBlock, script, textSize;
+    var myself = this, morph, customBlock, script, textSize, italic;
 
     switch (element.tag) {
     case 'block-definition':
@@ -1808,13 +1808,21 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         );
         morph = screen.createScriptDiagram(
             script,
-            element.require('annotations').children.map(function (child) {
-                var morph = myself.loadHelpScreenElement(
-                    child, screen, target, textColor
-                );
-                morph.arrowReverse = !!child.attributes['arrow-reverse'];
-                return morph;
-            }),
+            element.childNamed('annotations')
+                ? element.require('annotations').children.map(
+                    function (child) {
+                        var morph = myself.loadHelpScreenElement(
+                            child, screen, target, textColor
+                        );
+                        morph.arrowReverse =
+                            !!child.attributes['arrow-reverse'];
+                        if (child.attributes['arrow-color']) {
+                            morph.arrowColor =
+                                child.attributes['arrow-color'];
+                        }
+                        return morph;
+                    }
+                ) : [],
             element.childNamed('menus')
                 ? element.childNamed('menus').children.map(function (child) {
                     return myself.loadHelpScreenElement(
@@ -1837,17 +1845,21 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         break;
     case 'p':
     case 'small-p':
-        textSize = element.tag === 'small-p' ? 14 : 18;
+    case 'i':
+    case 'small-i':
+        textSize = element.tag === 'small-p' || element.tag === 'small-i'
+                        ? 14 : 18;
+        italic = element.tag === 'i' || element.tag === 'small-i';
         if (element.children.length === 0) {
             morph = screen.createParagraph(
                 element.contents.trim().split(/\s+/).join(' '),
-                textSize, textColor
+                textSize, textColor, italic
             );
         } else {
             morph = screen.createRichParagraph(null, textSize, textColor);
             morph.text = element.children.map(function (child) {
                 return myself.loadHelpScreenElement(
-                    child, screen, target, textColor
+                    child, screen, target, textColor, italic
                 );
             });
             morph.drawNew();
