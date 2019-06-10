@@ -2040,7 +2040,7 @@ SyntaxElementMorph.prototype.isEmptySlot = function () {
 
 // SyntaxElementMorph speech bubble feedback:
 
-SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target) {
+SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, noPopUp) {
     var bubble,
         txt,
         img,
@@ -2052,7 +2052,7 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target) {
         sf = this.parentThatIsA(ScrollFrameMorph),
         wrrld = this.world();
 
-    if ((value === undefined) || !wrrld) {
+    if ((value === undefined) || (!wrrld && !noPopUp)) {
         return null;
     }
     if (value instanceof ListWatcherMorph) {
@@ -2161,11 +2161,15 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target) {
         Math.max(this.rounding - 2, 6),
         0
     );
-    bubble.popUp(
-        wrrld,
-        pos,
-        isClickable
-    );
+    if (!noPopUp) {
+        bubble.popUp(
+            wrrld,
+            pos,
+            isClickable
+        );
+    } else {
+        return bubble;
+    }
     if (exportPic) {
         this.exportPictureWithResult(bubble);
     }
