@@ -1118,10 +1118,22 @@ SnapSerializer.prototype.loadScript = function (model, object) {
     model.children.forEach(child => {
         nextBlock = this.loadBlock(child, false, object);
         if (child.attributes['annotation']) {
-            nextBlock.annotation = +child.attributes['annotation'];
+            nextBlock.annotationID = +child.attributes['annotation'];
         }
         if (child.attributes['menu']) {
-            nextBlock.menuAnnotation = +child.attributes['menu'];
+            nextBlock.annotationMenu = +child.attributes['menu'];
+        }
+        if (child.attributes['arrow-start']) {
+            nextBlock.annotationArrowStart = +child.attributes['arrow-start'];
+        }
+        if (child.attributes['arrow-end']) {
+            nextBlock.annotationArrowEnd = +child.attributes['arrow-end'];
+        }
+        if (child.attributes['arrow-color']) {
+            nextBlock.annotationArrowColor = child.attributes['arrow-color'];
+        }
+        if (child.attributes['highlight']) {
+            nextBlock.annotationHighlight = true;
         }
         if (!nextBlock) {
             return;
@@ -1302,7 +1314,9 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object) {
         input.fixLayout();
     } else if (model.tag === 'block' || model.tag === 'custom-block') {
 //        block.silentReplaceInput(input, this.loadBlock(model, true, object));
-        block.replaceInput(input, this.loadBlock(model, true, object));
+        newInput = this.loadBlock(model, true, object);
+        block.replaceInput(input, newInput);
+        input = newInput;
     } else if (model.tag === 'color') {
         input.setColor(this.loadColor(model.contents));
     } else {
@@ -1315,10 +1329,22 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object) {
         }
     }
     if (model.attributes['annotation']) {
-        input.annotation = +model.attributes['annotation'];
+        input.annotationID = +model.attributes['annotation'];
     }
     if (model.attributes['menu']) {
-        input.menuAnnotation = +model.attributes['menu'];
+        input.annotationMenu = +model.attributes['menu'];
+    }
+    if (model.attributes['arrow-start']) {
+        input.annotationArrowStart = +model.attributes['arrow-start'];
+    }
+    if (model.attributes['arrow-end']) {
+        input.annotationArrowEnd = +model.attributes['arrow-end'];
+    }
+    if (model.attributes['arrow-color']) {
+        input.annotationArrowColor = model.attributes['arrow-color'];
+    }
+    if (model.attributes['highlight']) {
+        input.annotationHighlight = true;
     }
 };
 
