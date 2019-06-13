@@ -1817,6 +1817,8 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         morph = new PrototypeHatBlockMorph(customBlock);
         morph.nextBlock(customBlock.body.expression);
         break;
+    case 'bool':
+        return element.contents === 'true';
     case 'box':
         morph = screen.createBox(element.attributes.color);
         break;
