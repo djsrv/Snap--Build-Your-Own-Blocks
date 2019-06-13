@@ -2067,6 +2067,8 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, no
         morphToShow.isDraggable = false;
         morphToShow.expand(this.parentThatIsA(ScrollFrameMorph).extent());
         isClickable = true;
+    } else if (value instanceof ImageMorph) {
+        morphToShow = value;
     } else if (value instanceof Morph) {
         if (isSnapObject(value)) {
             img = value.thumbnail(new Point(40, 40));
