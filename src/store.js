@@ -1924,6 +1924,12 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         ) {
             morph.padding = +element.attributes.padding;
         }
+        if (element.attributes.x) {
+            morph.shiftRight = +element.attributes.x;
+        }
+        if (element.attributes.y) {
+            morph.shiftDown = +element.attributes.y;
+        }
         if (
             !(morph instanceof RichTextMorph
             || morph instanceof ScriptDiagramMorph
