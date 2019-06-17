@@ -2040,7 +2040,9 @@ SyntaxElementMorph.prototype.isEmptySlot = function () {
 
 // SyntaxElementMorph speech bubble feedback:
 
-SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, noPopUp) {
+SyntaxElementMorph.prototype.showBubble = function (
+    value, exportPic, target, forHelpScreen
+) {
     var bubble,
         txt,
         img,
@@ -2052,7 +2054,7 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, no
         sf = this.parentThatIsA(ScrollFrameMorph),
         wrrld = this.world();
 
-    if ((value === undefined) || (!wrrld && !noPopUp)) {
+    if ((value === undefined) || (!wrrld && !forHelpScreen)) {
         return null;
     }
     if (value instanceof ListWatcherMorph) {
@@ -2067,8 +2069,6 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, no
         morphToShow.isDraggable = false;
         morphToShow.expand(this.parentThatIsA(ScrollFrameMorph).extent());
         isClickable = true;
-    } else if (value instanceof ImageMorph) {
-        morphToShow = value;
     } else if (value instanceof Morph) {
         if (isSnapObject(value)) {
             img = value.thumbnail(new Point(40, 40));
@@ -2086,6 +2086,8 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, no
                     this.changed();
                 }
             };
+        } else if (forHelpScreen) {
+            morphToShow = value;
         } else {
             img = value.fullImage();
             morphToShow = new Morph();
@@ -2163,7 +2165,7 @@ SyntaxElementMorph.prototype.showBubble = function (value, exportPic, target, no
         Math.max(this.rounding - 2, 6),
         0
     );
-    if (!noPopUp) {
+    if (!forHelpScreen) {
         bubble.popUp(
             wrrld,
             pos,
