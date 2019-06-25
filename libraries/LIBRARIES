@@ -27,4 +27,4 @@ json.xml	Deal with JSON data	Turn JSON strings into lists with the listify block
 parallel_module.xml	Parallelization	Run several scripts in parallel and wait until all are done.
 strings.xml	String processing	Extract substrings of a string in various ways
 HummingbirdBlocks.xml	Hummingbird robotics	Control the Hummingbird robotics kit processor
-
+help_translator.xml	Help translator	Utility for creating and translating help screens
