@@ -2216,20 +2216,12 @@ SyntaxElementMorph.prototype.showBubble = function (
     );
     if (forHelpScreen) {
         return bubble;
-   }
-   bubble.popUp(
-       wrrld,
-       pos,
-       isClickable
-   );
-        bubble.popUp(
-            wrrld,
-            pos,
-            isClickable
-        );
-    } else {
-        return bubble;
     }
+    bubble.popUp(
+        wrrld,
+        pos,
+        isClickable
+    );
     if (exportPic) {
         this.exportPictureWithResult(bubble);
     }
