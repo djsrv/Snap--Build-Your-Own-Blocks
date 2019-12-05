@@ -66,7 +66,7 @@
             </p>
             <diagram>
                 <script>
-                    <custom-block s="list $arrowRight sentence %l">
+                    <custom-block s="list $arrowRight sentence %l" bubble="1">
                         <block s="reportMap">
                             <block s="reifyReporter">
                                 <autolambda>
