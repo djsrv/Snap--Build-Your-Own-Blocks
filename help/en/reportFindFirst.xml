@@ -13,7 +13,7 @@
     <box color="gray">
         <column>
             <p>
-                Reports the first item in the lsit that matches the
+                Reports the first item in the list that matches the
                 predicate.
             </p>
             <diagram>
