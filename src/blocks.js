@@ -3303,13 +3303,10 @@ BlockMorph.prototype.showHelp = function (lang) {
     var myself = this,
         ide = this.parentThatIsA(IDE_Morph),
         blockEditor,
-        pic = new Image(),
-        help,
         def,
         comment,
         block,
         spec,
-        sf,
         padding = 15;
 
     lang = lang || SnapTranslator.language;
@@ -3330,44 +3327,6 @@ BlockMorph.prototype.showHelp = function (lang) {
             ide = blockEditor.target.parentThatIsA(IDE_Morph);
         }
     }
-
-    pic.onload = function () {;
-        help = new Morph();
-        help.drawNew = function () {
-            var ctx;
-            this.image = newCanvas(this.extent());
-            ctx = this.image.getContext('2d');
-            ctx.drawImage(pic, 0, 0, this.width() - padding, this.height());
-        };
-        if (lang === 'old') {
-            help.setExtent(new Point(pic.width + padding, pic.height + padding));
-        } else {
-            help.setExtent(
-                new Point(pic.width / 2 + padding, pic.height / 2)
-            );
-        }
-        sf = new ScrollFrameMorph();
-        sf.contents.add(help);
-        sf.setColor(DialogBoxMorph.prototype.color);
-        sf.setWidth(help.width());
-        sf.setHeight(Math.min(help.height(), 400));
-        new DialogBoxMorph().inform(
-            'Help',
-            null,
-            myself.world(),
-            sf
-        );
-    };
-    pic.onerror = function () {
-        if (lang === 'old') {
-            return;
-        }
-        if (lang === 'en') { // fall back to old help screens
-            myself.showHelp('old');
-            return;
-        }
-        myself.showHelp('en'); // fall back to english help screens
-    };
 
     if (this.isCustomBlock) {
         def = this.isGlobal ? this.definition
@@ -3392,8 +3351,41 @@ BlockMorph.prototype.showHelp = function (lang) {
             return;
         }
     }
-    pic.src = ide.resourceURL(
-        'help', lang, spec + '.png'
+
+    function showDialog (err, help) {
+        if (err) {
+            ide.showMessage(err);
+            return;
+        }
+
+        var sf = new ScrollFrameMorph();
+        sf.contents.add(help);
+        sf.setColor(DialogBoxMorph.prototype.color);
+        sf.setHeight(Math.min(help.height(), 400));
+        if (help.height() > 400) {
+            sf.setWidth(help.width() + padding); // leave room for scrollbar
+        } else {
+            sf.setWidth(help.width());
+        }
+        new DialogBoxMorph().inform(
+            'Help',
+            null,
+            myself.world(),
+            sf
+        );
+    };
+    
+    ide.getURL(
+        ide.resourceURL('help', SnapTranslator.language, spec + '.xml?t=' + Date.now()),
+        function (xmlString) {
+            if (xmlString) {
+                new SnapSerializer().loadHelpScreen(
+                    xmlString, showDialog
+                );
+            } else {
+                ide.showMessage('could not retrieve help screen ' + spec);
+            }
+        }
     );
 };
 

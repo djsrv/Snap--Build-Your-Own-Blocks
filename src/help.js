@@ -58,7 +58,7 @@ HelpScreenMorph.prototype.init = function (loadCallback) {
 
     // initialize inherited properties:
     HelpScreenMorph.uber.init.call(this);
-    this.setWidth(HelpScreenMorph.prototype.screenWidth - this.padding);
+    this.bounds.setWidth(HelpScreenMorph.prototype.screenWidth - this.padding);
     this.color = DialogBoxMorph.prototype.color;
 };
 
@@ -101,7 +101,7 @@ HelpScreenMorph.prototype.fixLayout = function () {
             resizeBox(box);
         }
     });
-    this.setHeight(nextY - verticalPadding);
+    this.bounds.setHeight(nextY - verticalPadding);
 };
 
 HelpScreenMorph.prototype.createThumbnail = function () {
@@ -210,7 +210,7 @@ HelpScreenMorph.prototype.createMenu = function (items, noEmptyOption) {
         }
     });
     morph = input.menuFromDict(dict, noEmptyOption);
-    morph.drawNew();
+    morph.createItems();
     for (i = 0; i < items.length; i++) {
         item = items[i];
         itemMorph = morph.children[noEmptyOption ? i : i + 1];
@@ -384,13 +384,13 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, callback) {
                         parent.relWidthDenominator -= morph.relativeWidth;
                         morph.relativeWidth = 0;
                     } else {
-                        morph.silentSetWidth(maxWidth);
+                        morph.bounds.setWidth(maxWidth);
                     }
                 }
             } else if (parent instanceof BoxMorph) {
-                morph.silentSetWidth(parent.width() - 2 * padding);
+                morph.bounds.setWidth(parent.width() - 2 * padding);
             } else {
-                morph.silentSetWidth(parent.width());
+                morph.bounds.setWidth(parent.width());
             }
         }
         if (morph instanceof AlignmentMorph || morph instanceof BoxMorph) {
@@ -424,9 +424,10 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, callback) {
 };
 
 SnapSerializer.prototype.loadHelpScreenElement = function (
-    element, screen, target, textColor
+    element, screen, target, textColor, noShield
 ) {
-    var myself = this, morph, customBlock, script, textSize, italic;
+    var myself = this, morph, customBlock, script, textSize, italic,
+        container, shield;
 
     function normalizeWhitespace(text) {
         return text.trim().replace(/\s+/g, ' ') // collapse whitespace
@@ -454,7 +455,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
             element.childNamed('block-definition')
                 || element.childNamed('menu')
                 || element.require('script'),
-            screen, target, textColor
+            screen, target, textColor, true
         );
         morph = screen.createScriptDiagram(
             script,
@@ -471,7 +472,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
             element.childNamed('menus')
                 ? element.childNamed('menus').children.map(function (child) {
                     return myself.loadHelpScreenElement(
-                        child, screen, target, textColor
+                        child, screen, target, textColor, true
                     );
                 })
                 : [],
@@ -518,7 +519,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
                     element.attributes.color || textColor, italic
                 );
             });
-            morph.drawNew();
+            morph.fixLayout();
         }
         break;
     case 'row':
@@ -541,7 +542,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
             || morph instanceof TextMorph
         ) {
             if (element.attributes['width']) {
-                morph.silentSetWidth(+element.attributes['width']);
+                morph.bounds.setWidth(+element.attributes['width']);
                 morph.relativeWidth = 0;
             } else {
                 // width will be adjusted later
@@ -576,6 +577,22 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
             });
         }
     }
+
+    // block interaction
+    if (!noShield && morph instanceof BlockMorph || morph instanceof MenuMorph) {
+        container = new Morph();
+        container.alpha = 0;
+        container.setExtent(morph.extent());
+        container.add(morph);
+        
+        shield = new Morph();
+        shield.alpha = 0;
+        shield.setExtent(morph.extent());
+        container.add(shield);
+
+        return container;
+    }
+
     return morph;
 };
 
@@ -664,7 +681,7 @@ ImageMorph.prototype.init = function (src, width, height, onload, onerror) {
     this.setExtent(new Point(width, height));
     this.pic = new Image();
     this.pic.onload = function () {
-        myself.drawNew();
+        myself.rerender();
         myself.changed();
         if (typeof onload === 'function') {
             onload();
@@ -680,10 +697,7 @@ ImageMorph.prototype.init = function (src, width, height, onload, onerror) {
     );
 };
 
-ImageMorph.prototype.drawNew = function () {
-    var ctx;
-    this.image = newCanvas(this.extent());
-    ctx = this.image.getContext('2d');
+ImageMorph.prototype.render = function (ctx) {
     if (this.pic) {
         ctx.drawImage(this.pic, 0, 0, this.width(), this.height());
     }
@@ -817,13 +831,9 @@ RichTextMorph.prototype.parse = function () {
     this.maxLineWidth = Math.max(this.maxLineWidth, lineWidth);
 };
 
-RichTextMorph.prototype.drawNew = function () {
-    var myself = this, context, height, width, i, j, line, lineHeight, word,
-        shadowHeight, shadowWidth, offx, offy, x, y;
+RichTextMorph.prototype.fixLayout = function () {
+    var myself = this, height, shadowHeight, shadowWidth;
 
-    this.image = newCanvas();
-    context = this.image.getContext('2d');
-    context.font = this.font();
     this.parse();
 
     // set my extent
@@ -842,19 +852,31 @@ RichTextMorph.prototype.drawNew = function () {
             new Point(this.maxWidth + shadowWidth, height)
         );
     }
-    this.image.width = this.width();
-    this.image.height = this.height();
+
+    // notify my parent of layout change
+    if (this.parent) {
+        if (this.parent.layoutChanged) {
+            this.parent.layoutChanged();
+        }
+    }
+};
+
+RichTextMorph.prototype.render = function (ctx) {
+    var width, i, j, line, lineHeight, word,
+    shadowHeight, shadowWidth, offx, offy, x, y;
+
+    shadowWidth = Math.abs(this.shadowOffset.x);
+    shadowHeight = Math.abs(this.shadowOffset.y);
 
     // prepare context for drawing text
-    context = this.image.getContext('2d');
-    context.font = this.font();
-    context.textAlign = 'left';
-    context.textBaseline = 'bottom';
+    ctx.font = this.font();
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
 
     // fill the background, if desired
     if (this.backgroundColor) {
-        context.fillStyle = this.backgroundColor.toString();
-        context.fillRect(0, 0, this.width(), this.height());
+        ctx.fillStyle = this.backgroundColor.toString();
+        ctx.fillRect(0, 0, this.width(), this.height());
     }
 
     // don't bother with drawing shadow
@@ -862,7 +884,7 @@ RichTextMorph.prototype.drawNew = function () {
     // now draw the actual text
     offx = Math.abs(Math.min(this.shadowOffset.x, 0));
     offy = Math.abs(Math.min(this.shadowOffset.y, 0));
-    context.fillStyle = this.color.toString();
+    ctx.fillStyle = this.color.toString();
 
     y = 0;
     for (i = 0; i < this.lines.length; i++) {
@@ -885,7 +907,7 @@ RichTextMorph.prototype.drawNew = function () {
                     y - (this.calculateWordHeight(word) / 2) + offy
                 )));
             } else {
-                context.fillText(
+                ctx.fillText(
                     word, x + offx,
                     y + (this.calculateWordHeight(word) / 2) + offy
                 );
@@ -893,13 +915,6 @@ RichTextMorph.prototype.drawNew = function () {
             x += this.calculateWordWidth(word);
         }
         y += lineHeight / 2 + shadowHeight;
-    }
-
-    // notify my parent of layout change
-    if (this.parent) {
-        if (this.parent.layoutChanged) {
-            this.parent.layoutChanged();
-        }
     }
 };
 
@@ -987,15 +1002,14 @@ ScriptDiagramMorph.prototype.init = function (
 
     // initialize inherited properties:
     ScriptDiagramMorph.uber.init.call(this);
-};
 
-ScriptDiagramMorph.prototype.drawNew = function () {
-    this.image = newCanvas(new Point(1, 1));
+    // override inherited properties:
+    this.alpha = 0;
 };
 
 ScriptDiagramMorph.prototype.fixLayout = function () {
     var myself = this, scriptWidth, scriptHeight, scale, diagramWidth,
-        diagramHeight, annotationsHeight, img, scaledImg, ctx;
+        diagramHeight, annotationsHeight
 
     if (this.script instanceof BlockMorph) {
         scriptWidth = this.script.stackFullBounds().width();
@@ -1077,12 +1091,11 @@ ScriptDiagramMorph.prototype.fixLayout = function () {
         }
     });
 
-    img = this.script.fullImage();
-    scaledImg = newCanvas(new Point(scriptWidth, scriptHeight));
-    ctx = scaledImg.getContext('2d');
-    ctx.drawImage(img, 0, 0, scriptWidth, scriptHeight);
-    this.scriptDisplay.image = scaledImg;
-    this.setHeight(Math.max(diagramHeight, annotationsHeight));
+    this.scriptDisplay.render = ctx => {
+        var img = this.script.fullImage();
+        ctx.drawImage(img, 0, 0, scriptWidth, scriptHeight);
+    };
+    this.bounds.setHeight(Math.max(diagramHeight, annotationsHeight));
 };
 
 ScriptDiagramMorph.prototype.addAnnotations = function (
@@ -1162,7 +1175,7 @@ ScriptDiagramMorph.prototype.addAnnotations = function (
         );
         arrow.color = arrowStartMorph.annotationArrowColor
                         || this.defaultArrowColor;
-        arrow.drawNew();
+        arrow.fixLayout();
         annotationsHeight = Math.max(
             annotationsHeight, arrow.bottom() - this.top()
         );
@@ -1251,7 +1264,7 @@ ScriptDiagramMorph.prototype.addAnnotation = function (
         annotation.annotationArrowDetour || 0
     );
     arrow.color = annotation.annotationArrowColor || this.defaultArrowColor;
-    arrow.drawNew();
+    arrow.fixLayout();
     this.arrows.push(arrow);
     this.add(arrow);
 
@@ -1313,16 +1326,18 @@ DiagramArrowMorph.prototype.init = function (
     DiagramArrowMorph.uber.init.call(this);
 };
 
-DiagramArrowMorph.prototype.drawNew = function () {
-    var start, end, oldStart, ctx, theta, r, detourSize, x, y;
-
-    r = 5; // arrow head size
-    detourSize = this.detourSize;
-
-    this.silentSetExtent(
+DiagramArrowMorph.prototype.fixLayout = function () {
+    this.bounds.setExtent(
         this.end.subtract(this.start).abs().add(this.padding * 2)
     );
     this.setPosition(this.start.min(this.end).subtract(this.padding));
+};
+
+DiagramArrowMorph.prototype.render = function (ctx) {
+    var start, end, oldStart, theta, r, detourSize, x, y;
+
+    r = 5; // arrow head size
+    detourSize = this.detourSize;
 
     start = new Point(
         this.start.x < this.end.x
@@ -1346,8 +1361,6 @@ DiagramArrowMorph.prototype.drawNew = function () {
         end = oldStart;
     }
 
-    this.image = newCanvas(this.extent());
-    ctx = this.image.getContext('2d');
     ctx.strokeStyle = ctx.fillStyle = this.color.toString();
 
     theta = end.subtract(start).theta();
