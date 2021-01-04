@@ -3586,7 +3586,7 @@ BlockMorph.prototype.showHelp = function (lang) {
         function (xmlString) {
             if (xmlString) {
                 new SnapSerializer().loadHelpScreen(
-                    xmlString, showDialog
+                    xmlString, ide, showDialog
                 );
             } else {
                 ide.showMessage('could not retrieve help screen ' + spec);

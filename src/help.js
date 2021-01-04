@@ -40,10 +40,6 @@ HelpScreenMorph.prototype.padding = 15;
 HelpScreenMorph.prototype.verticalPadding = 10;
 HelpScreenMorph.prototype.font = 'Baskerville, "Libre Baskerville"';
 
-// HelpScreenMorph library caching:
-
-HelpScreenMorph.prototype.libraryCache = {};
-
 // HelpScreenMorph instance creation:
 
 function HelpScreenMorph(loadCallback) {
@@ -199,50 +195,22 @@ HelpScreenMorph.prototype.createMenu = function (items, noEmptyOption) {
     return morph;
 };
 
-// HelpScreenMorph library caching (modified from LibraryImportDialogMorph):
-
-HelpScreenMorph.prototype.hasCachedLibrary = function (key) {
-    return HelpScreenMorph.prototype.libraryCache.hasOwnProperty(key);
-};
-
-HelpScreenMorph.prototype.cacheLibrary = function (key, blocks) {
-    HelpScreenMorph.prototype.libraryCache[key] = blocks ;
-};
-
-HelpScreenMorph.prototype.cachedLibrary = function (key) {
-    return HelpScreenMorph.prototype.libraryCache[key];
-};
-
-HelpScreenMorph.prototype.loadLibrary = function (fileName, callback) {
-    var myself = this;
-    if (this.hasCachedLibrary(fileName)) {
-        callback(this.cachedLibrary(fileName));
-    } else {
-        IDE_Morph.prototype.getURL(
-            IDE_Morph.prototype.resourceURL('libraries', fileName),
-            function(libraryXML) {
-                var blocks = new SnapSerializer().loadBlocks(libraryXML);
-                myself.cacheLibrary(fileName, blocks);
-                callback(blocks);
-            }
-        );
-    }
-};
-
 // SnapSerializer ///////////////////////////////////////////////////////////
 
-SnapSerializer.prototype.loadHelpScreen = function (xmlString, callback) {
+SnapSerializer.prototype.loadHelpScreen = function (xmlString, ide, callback) {
     // public - answer the HelpScreenMorph represented by xmlString
     var myself = this,
         model = this.parse(xmlString),
         helpScreen = new HelpScreenMorph(callback),
         stage = new StageMorph(),
         target = new SpriteMorph(),
-        blocks,
-        libraries;
+        blocks;
 
+    // hold custom blocks in a fake stage
     this.project.stage = stage;
     target.globalBlocks = this.project.stage.globalBlocks;
+    // since the real stage holds library blocks, use that as a backup
+    this.project.targetStage = ide.stage;
 
     if (+model.attributes.version > this.version) {
         throw 'Module uses newer version of Serializer';
@@ -254,32 +222,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, callback) {
         myself.populateCustomBlocks(target, blocks, true);
     }
 
-    libraries = model.childNamed('libraries');
-    if (libraries && libraries.children.length > 0) {
-        loadLibrary(0);
-    } else {
-        librariesLoaded();
-    }
-
-    function loadLibrary (index) {
-        var el = libraries.children[index];
-        if (el) {
-            if (el.tag === 'library' && el.attributes.filename) {
-                helpScreen.loadLibrary(el.attributes.filename, function (blocks) {
-                    blocks.forEach(function (def) {
-                        def.receiver = stage;
-                        stage.globalBlocks.push(def);
-                        stage.replaceDoubleDefinitionsFor(def);
-                    });
-                    loadLibrary(index + 1);
-                });
-            } else {
-                loadLibrary(index + 1);
-            }
-        } else {
-            librariesLoaded();
-        }
-    }
+    librariesLoaded();
 
     function librariesLoaded () {
         model.children.forEach(function (child) {
