@@ -427,7 +427,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         morph = screen.createRow();
         break;
     case 'script':
-        morph = this.loadScript(element, target);
+        morph = this.loadScript(element, target, true);
         morph.fixBlockColor(null, true); // force zebra coloring
         break;
     case 'text':
@@ -537,36 +537,6 @@ SnapSerializer.prototype.handleAnnotations = function (model, morph) {
     if (model.attributes['ghost']) {
         morph.annotationGhost = model.attributes['ghost'] === 'true';
     }
-};
-
-SnapSerializer.prototype.loadBlockOld = SnapSerializer.prototype.loadBlock;
-SnapSerializer.prototype.loadBlock = function (model, isReporter, object) {
-    var myself = this,
-        block = this.loadBlockOld(model, isReporter, object),
-        migration, migrationOffset = 0, inputs;
-    this.handleAnnotations(model, block);
-    if (model.tag === 'block' && model.attributes.s) {
-        migration = SpriteMorph.prototype.blockMigrations[
-            model.attributes.s
-        ];
-        if (migration) {
-            migrationOffset = migration.offset;
-        }
-    }
-    inputs = block.inputs();
-    model.children.forEach(function (child, i) {
-        var input = inputs[i + migrationOffset], inputs2;
-        if (!contains(['variables', 'comment', 'receiver'], child.tag)) {
-            myself.handleAnnotations(child, input);
-        }
-        if (child.tag === 'list') {
-            inputs2 = input.inputs();
-            child.children.forEach(function (child2, i) {
-                myself.handleAnnotations(child2, inputs2[i]);
-            });
-        }
-    }, this);
-    return block;
 };
 
 // HelpBoxMorph /////////////////////////////////////////////////////////////

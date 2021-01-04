@@ -1106,7 +1106,7 @@ SnapSerializer.prototype.loadScriptsArray = function (model, object) {
     return scripts;
 };
 
-SnapSerializer.prototype.loadScript = function (model, object) {
+SnapSerializer.prototype.loadScript = function (model, object, forHelp) {
     // private
     var topBlock, block, nextBlock;
 
@@ -1118,7 +1118,7 @@ SnapSerializer.prototype.loadScript = function (model, object) {
     }
 
     model.children.forEach(child => {
-        nextBlock = this.loadBlock(child, false, object);
+        nextBlock = this.loadBlock(child, false, object, forHelp);
         if (!nextBlock) {
             return;
         }
@@ -1150,7 +1150,7 @@ SnapSerializer.prototype.loadComment = function (model) {
     return comment;
 };
 
-SnapSerializer.prototype.loadBlock = function (model, isReporter, object) {
+SnapSerializer.prototype.loadBlock = function (model, isReporter, object, forHelp) {
     // private
     var block, info, inputs, isGlobal, receiver, migration,
         migrationOffset = 0;
@@ -1230,6 +1230,9 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter, object) {
         block = this.obsoleteBlock(isReporter);
     }
     block.isDraggable = true;
+    if (forHelp) {
+        this.handleAnnotations(model, block);
+    }
     inputs = block.inputs();
     model.children.forEach((child, i) => {
         if (child.tag === 'variables') {
@@ -1240,7 +1243,7 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter, object) {
         } else if (child.tag === 'receiver') {
             nop(); // ignore
         } else {
-            this.loadInput(child, inputs[i + migrationOffset], block, object);
+            this.loadInput(child, inputs[i + migrationOffset], block, object, forHelp);
         }
     });
     block.cachedInputs = null;
@@ -1258,14 +1261,17 @@ SnapSerializer.prototype.obsoleteBlock = function (isReporter) {
     return block;
 };
 
-SnapSerializer.prototype.loadInput = function (model, input, block, object) {
+SnapSerializer.prototype.loadInput = function (model, input, block, object, forHelp) {
     // private
     var inp, val;
     if (isNil(input)) {
         return;
     }
+    if (forHelp) {
+        this.handleAnnotations(model, input);
+    }
     if (model.tag === 'script') {
-        inp = this.loadScript(model, object);
+        inp = this.loadScript(model, object, forHelp);
         if (inp) {
             if (block.selector === 'reifyReporter' ||
                     block.selector === 'reifyPredicate') {
@@ -1277,7 +1283,7 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object) {
             }
         }
     } else if (model.tag === 'autolambda' && model.children[0]) {
-        inp = this.loadBlock(model.children[0], true, object);
+        inp = this.loadBlock(model.children[0], true, object, forHelp);
         if (inp) {
             input.replaceInput(input.children[0], inp);
             input.fixLayout();
@@ -1292,13 +1298,14 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object) {
                 item,
                 input.children[input.children.length - 2],
                 input,
-                object
+                object,
+                forHelp
             );
         });
         input.fixLayout();
     } else if (model.tag === 'block' || model.tag === 'custom-block') {
 //        block.silentReplaceInput(input, this.loadBlock(model, true, object));
-        block.replaceInput(input, this.loadBlock(model, true, object));
+        block.replaceInput(input, this.loadBlock(model, true, object, forHelp));
     } else if (model.tag === 'color') {
         input.setColor(this.loadColor(model.contents));
     } else {
