@@ -3560,7 +3560,7 @@ BlockMorph.prototype.showHelp = function (lang) {
 
     function showDialog (err, help) {
         if (err) {
-            ide.showMessage(err);
+            ide.showMessage(err.toString());
             return;
         }
 
