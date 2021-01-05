@@ -71,6 +71,26 @@ Localizer.prototype.translate = function (string) {
     ) ? this.dict[this.language][string] : string;
 };
 
+Localizer.prototype.translateHelp = function (string) {
+    if (
+        Object.prototype.hasOwnProperty.call(
+                this.dict[this.language], 'help_strings')
+        && Object.prototype.hasOwnProperty.call(
+                this.dict[this.language].help_strings, string)
+    ) {
+        return this.dict[this.language].help_strings[string];
+    }
+    if (
+        this.language !== 'en'
+        && Object.prototype.hasOwnProperty.call(this.dict.en, 'help_strings')
+        && Object.prototype.hasOwnProperty.call(
+                this.dict.en.help_strings, string)
+    ) {
+        return this.dict.en.help_strings[string];
+    }
+    return string;
+};
+
 Localizer.prototype.languages = function () {
     var property, arr = [];
     for (property in this.dict) {
@@ -97,9 +117,47 @@ Localizer.prototype.credits = function () {
     return txt;
 };
 
+Localizer.prototype.loadHelp = function(callback) {
+    this.loadHelpForLang('en', () => {
+        if (this.language === 'en') {
+            callback();
+        } else {
+            this.loadHelpForLang(this.language, callback);
+        }
+    });
+};
+
+Localizer.prototype.loadHelpForLang = function(lang, callback) {
+    if (
+        !Object.prototype.hasOwnProperty.call(this.dict[lang], 'has_help')
+        || Object.prototype.hasOwnProperty.call(
+                    this.dict[lang], 'help_strings')
+    ) {
+        callback();
+        return;
+    }
+
+    var scriptId = lang === 'en' ? 'help' : 'help-translation',
+        script = document.getElementById(scriptId),
+        src = IDE_Morph.prototype.resourceURL(
+            'locale', 'help-' + lang + '.js'
+        );
+
+    if (script) {
+        document.head.removeChild(script);
+    }
+
+    script = document.createElement('script');
+    script.id = scriptId;
+    document.head.appendChild(script);
+    script.onload = callback;
+    script.src = src;
+};
+
 Localizer.prototype.unload = function () {
     var dict,
-        keep = ['language_name', 'language_translator', 'last_changed'];
+        keep = ['language_name', 'language_translator', 'last_changed',
+                'has_help'];
     this.languages().forEach(lang => {
         var key;
         if (lang !== 'en') {
@@ -126,6 +184,8 @@ SnapTranslator.dict.en = {
         'jens@moenig.org',
     'last_changed':
         '2020-07-09',
+    'has_help':
+        true,
 
     // symbols in dropdowns
     '__shout__go__':

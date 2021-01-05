@@ -176,7 +176,8 @@ HelpScreenMorph.prototype.createMenu = function (items, noEmptyOption) {
                 );
                 tempParent.add(input);
             }
-            dict[item.contents] = null;
+            // treat the item as an option to force translation
+            dict[item.contents] = [item.contents];
         }
     });
     morph = input.menuFromDict(dict, noEmptyOption);
@@ -215,16 +216,16 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, ide, callback) {
     if (+model.attributes.version > this.version) {
         throw 'Module uses newer version of Serializer';
     }
-    
-    blocks = model.childNamed('blocks');
-    if (blocks) {
-        myself.loadCustomBlocks(target, blocks, true);
-        myself.populateCustomBlocks(target, blocks, true);
-    }
 
-    librariesLoaded();
+    SnapTranslator.loadHelp(translationsLoaded);
 
-    function librariesLoaded () {
+    function translationsLoaded () {
+        blocks = model.childNamed('blocks');
+        if (blocks) {
+            myself.loadCustomBlocks(target, blocks, true, false, true);
+            myself.populateCustomBlocks(target, blocks, true, true);
+        }
+
         model.children.forEach(function (child) {
             var morph;
             if (child.tag === 'blocks' || child.tag === 'libraries') {
@@ -255,7 +256,7 @@ SnapSerializer.prototype.loadHelpScreen = function (xmlString, ide, callback) {
 SnapSerializer.prototype.loadHelpScreenElement = function (
     element, screen, target, textFont, textColor
 ) {
-    var myself = this, morph, customBlock, script, textSize, bold, italic,
+    var myself = this, morph, customBlock, script, text, textSize, bold, italic,
         smallTextTags = ['small-header', 'small-p', 'small-i'],
         boldTextTags = ['header', 'small-header'],
         italicTextTags = ['i', 'small-i'];
@@ -270,7 +271,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         customBlock = detect(target.globalBlocks, function (block) {
             return block.blockSpec() === element.attributes.s;
         });
-        morph = new PrototypeHatBlockMorph(customBlock);
+        morph = new PrototypeHatBlockMorph(customBlock, true);
         morph.nextBlock(customBlock.body.expression);
         morph.fixBlockColor(null, true); // force zebra coloring
         break;
@@ -351,18 +352,26 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         italic = contains(italicTextTags, element.tag);
         if (element.children.length === 0) {
             morph = screen.createParagraph(
-                normalizeWhitespace(element.contents),
+                element.attributes.id
+                    ? SnapTranslator.translateHelp(element.attributes.id)
+                    : normalizeWhitespace(element.contents),
                 textSize, textFont, textColor, bold, italic
             );
         } else {
             morph = screen.createRichParagraph(
                 null, textSize, textFont, textColor, bold, italic
             );
-            morph.text = element.children.map(function (child) {
-                return myself.loadHelpScreenElement(
-                    child, screen, target, textFont, textColor
+            if (element.attributes.id) { 
+                morph.text = this.translateRichHelpText(
+                    element, screen, target, textFont, textColor
                 );
-            });
+            } else {
+                morph.text = element.children.map(function (child) {
+                    return myself.loadHelpScreenElement(
+                        child, screen, target, textFont, textColor
+                    );
+                });
+            }
             morph.fixLayout();
         }
         break;
@@ -374,12 +383,15 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         morph.fixBlockColor(null, true); // force zebra coloring
         break;
     case 'text':
+        text = element.attributes.id
+            ? SnapTranslator.translateHelp(element.attributes.id)
+            : normalizeWhitespace(element.contents);
         return element.attributes.font || element.attributes.color
             ? {
-                text: normalizeWhitespace(element.contents),
+                text: text,
                 font: element.attributes.font,
                 color: element.attributes.color
-            } : normalizeWhitespace(element.contents);
+            } : text;
     case 'thumbnail':
         morph = screen.createThumbnail();
         break;
@@ -444,6 +456,73 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
         }
     }
     return morph;
+};
+
+SnapSerializer.prototype.translateRichHelpText = function(
+    element, screen, target, textFont, textColor
+) {
+    // replace {n} in the translated string with the morph
+    // represented by the element's nth child or the element
+    // with a matching id attribute
+
+    var translation = SnapTranslator.translateHelp(element.attributes.id),
+        inPlaceholder = false, part = '', parts = [],
+        i, ch, componentIdx, component;
+
+    for (i = 0; i < translation.length; i++) {
+        ch = translation[i];
+        if (ch === '{') {
+            if (inPlaceholder) {
+                throw new Error('translateRichHelpText: Unexpected {');
+            } else {
+                inPlaceholder = true;
+                if (part.length > 0) {
+                    parts.push(part.trim());
+                    part = '';
+                }
+            }
+        } else if (ch === '}') {
+            if (!inPlaceholder) {
+                throw new Error('translateRichHelpText: Unexpected }');
+            } else {
+                inPlaceholder = false;
+                componentIdx = parseInt(part);
+                if (
+                    !isNaN(componentIdx)
+                    && 1 <= componentIdx
+                    && componentIdx <= element.children.length
+                ) {
+                    component = element.children[componentIdx - 1];
+                } else {
+                    component = detect(
+                        element.children,
+                        (child) => child.attributes.id === part
+                    );
+                }
+                if (component) {
+                    parts.push(
+                        this.loadHelpScreenElement(
+                            component,
+                            screen,
+                            target,
+                            element.attributes.font || textFont,
+                            element.attributes.color || textColor
+                        )
+                    );
+                } else {
+                    parts.push('{' + part + '}');
+                }
+                part = '';
+            }
+        } else {
+            part += ch;
+        }
+    }
+    if (part.length > 0) {
+        parts.push(part.trim());
+    }
+
+    return parts;
 };
 
 SnapSerializer.prototype.handleAnnotations = function (model, morph) {
@@ -714,12 +793,16 @@ ImageMorph.prototype.init = function (src, width, height, onload, onerror) {
         }
     };
     this.pic.onerror = function () {
-        if (typeof onerror === 'function') {
+        if (SnapTranslator.language !== 'en') {
+            myself.pic.src = IDE_Morph.prototype.resourceURL(
+                'help', 'en', src
+            );
+        } else if (typeof onerror === 'function') {
             onerror();
         }
     };
     this.pic.src = IDE_Morph.prototype.resourceURL(
-        'help', SnapTranslator.language, src + '?t=' + Date.now()
+        'help', SnapTranslator.language, src
     );
 };
 

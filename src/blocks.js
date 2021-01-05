@@ -3582,7 +3582,7 @@ BlockMorph.prototype.showHelp = function (lang) {
     };
     
     ide.getURL(
-        ide.resourceURL('help', SnapTranslator.language, spec + '.xml?t=' + Date.now()),
+        ide.resourceURL('help', 'xml', spec + '.xml'),
         function (xmlString) {
             if (xmlString) {
                 new SnapSerializer().loadHelpScreen(

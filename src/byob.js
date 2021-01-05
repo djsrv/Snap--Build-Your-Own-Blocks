@@ -186,7 +186,7 @@ CustomBlockDefinition.prototype.templateInstance = function () {
     return block;
 };
 
-CustomBlockDefinition.prototype.prototypeInstance = function () {
+CustomBlockDefinition.prototype.prototypeInstance = function (forHelp) {
     var block, slot;
 
     // make a new block instance and mark it as prototype
@@ -198,6 +198,10 @@ CustomBlockDefinition.prototype.prototypeInstance = function () {
             this.type === 'predicate',
             true
         );
+    }
+    if (forHelp) {
+        block.forHelp = true;
+        block.refresh();
     }
 
     // assign slot declarations to prototype inputs
@@ -459,7 +463,7 @@ CustomBlockDefinition.prototype.isDirectlyRecursive = function () {
 
 // CustomBlockDefinition localizing, highly experimental
 
-CustomBlockDefinition.prototype.localizedSpec = function () {
+CustomBlockDefinition.prototype.localizedSpec = function (forHelpProto) {
 	if (this.cachedTranslation) {return this.cachedTranslation; }
 
 	var loc = this.translations[SnapTranslator.language],
@@ -473,7 +477,9 @@ CustomBlockDefinition.prototype.localizedSpec = function () {
  	}
 
     if (isNil(loc)) {return sem; }
-    inputs = BlockMorph.prototype.parseSpec(sem).filter(str => isInput(str));
+    inputs = forHelpProto
+        ? this.inputNames().map((name) => "%'" + SnapTranslator.translateHelp(name) + "'")
+        : BlockMorph.prototype.parseSpec(sem).filter(str => isInput(str));
 	locParts = BlockMorph.prototype.parseSpec(loc);
 
 	// perform a bunch of sanity checks on the localized spec
@@ -647,7 +653,8 @@ CustomCommandBlockMorph.prototype.init = function (definition, isProto) {
     this.category = definition.category;
     this.selector = 'evaluateCustomBlock';
     this.variables = null;
-	this.storedTranslations = null; // transient - only for "wishes"
+    this.storedTranslations = null; // transient - only for "wishes"
+    this.forHelp = false; // transient - only for help screens
     this.initializeVariables();
     if (definition) { // needed for de-serializing
         this.refresh();
@@ -670,8 +677,9 @@ CustomCommandBlockMorph.prototype.initializeVariables = function (oldVars) {
 
 CustomCommandBlockMorph.prototype.refresh = function (aDefinition) {
     var def = aDefinition || this.definition,
-        newSpec = this.isPrototype ?
-                def.spec : def.localizedSpec(),
+        newSpec = this.isPrototype && !this.forHelp
+            ? def.spec
+            : def.localizedSpec(this.isPrototype && this.forHelp),
         oldInputs;
 
 	this.semanticSpec = def.blockSpec();
@@ -1408,6 +1416,7 @@ CustomReporterBlockMorph.prototype.init = function (
     this.variables = new VariableFrame();
     this.initializeVariables();
     this.selector = 'evaluateCustomBlock';
+    this.forHelp = false; // transient - only for help screens
     if (definition) { // needed for de-serializing
         this.refresh();
     }
@@ -2524,12 +2533,12 @@ PrototypeHatBlockMorph.uber = HatBlockMorph.prototype;
 
 // PrototypeHatBlockMorph instance creation:
 
-function PrototypeHatBlockMorph(definition) {
-    this.init(definition);
+function PrototypeHatBlockMorph(definition, forHelp) {
+    this.init(definition, forHelp);
 }
 
-PrototypeHatBlockMorph.prototype.init = function (definition) {
-    var proto = definition.prototypeInstance(),
+PrototypeHatBlockMorph.prototype.init = function (definition, forHelp) {
+    var proto = definition.prototypeInstance(forHelp),
         vars;
 
     this.definition = definition;

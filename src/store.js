@@ -928,7 +928,8 @@ SnapSerializer.prototype.loadCustomBlocks = function (
     object,
     element,
     isGlobal,
-    isDispatch
+    isDispatch,
+    forHelp
 ) {
     // private
     element.children.forEach(child => {
@@ -1007,13 +1008,19 @@ SnapSerializer.prototype.loadCustomBlocks = function (
         if (comment) {
             definition.comment = this.loadComment(comment);
         }
+
+        if (forHelp) {
+            definition.translations[SnapTranslator.language]
+                = SnapTranslator.translateHelp(definition.abstractBlockSpec());
+        }
     });
 };
 
 SnapSerializer.prototype.populateCustomBlocks = function (
     object,
     element,
-    isGlobal
+    isGlobal,
+    forHelp
 ) {
     // private
     element.children.forEach((child, index) => {
@@ -1027,7 +1034,7 @@ SnapSerializer.prototype.populateCustomBlocks = function (
         if (script) {
             definition.body = new Context(
                 null,
-                script ? this.loadScript(script, object) : null,
+                script ? this.loadScript(script, object, forHelp) : null,
                 null,
                 object
             );
@@ -1161,7 +1168,9 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter, object, forHel
                 'var'
             )) {
             block = SpriteMorph.prototype.variableBlock(
-                model.attributes['var']
+                forHelp
+                    ? SnapTranslator.translateHelp(model.attributes['var'])
+                    : model.attributes['var']
             );
         } else {
         /*
@@ -1309,17 +1318,17 @@ SnapSerializer.prototype.loadInput = function (model, input, block, object, forH
     } else if (model.tag === 'color') {
         input.setColor(this.loadColor(model.contents));
     } else {
-        val = this.loadValue(model);
+        val = this.loadValue(model, null, forHelp);
         if (!isNil(val) && !isNil(input) && input.setContents) {
             // checking whether "input" is nil should not
             // be necessary, but apparently is after retina support
             // was added.
-            input.setContents(this.loadValue(model));
+            input.setContents(this.loadValue(model, null, forHelp));
         }
     }
 };
 
-SnapSerializer.prototype.loadValue = function (model, object) {
+SnapSerializer.prototype.loadValue = function (model, object, forHelp) {
     // private
     var v, i, lst, items, el, center, image, name, audio, option, bool, origin,
     	wish, def,
@@ -1365,7 +1374,9 @@ SnapSerializer.prototype.loadValue = function (model, object) {
         if (wish) {
             return this.loadValue(wish);
         }
-        return model.contents;
+        return forHelp
+            ? SnapTranslator.translateHelp(model.contents)
+            : model.contents;
     case 'bool':
         return model.contents === 'true';
     case 'list':
