@@ -1224,7 +1224,6 @@ ScriptDiagramMorph.prototype.populateDiagram = function () {
             bubble = annotated.showBubble(
                 bubbleValue, false, new SpriteMorph(), true
             );
-            bubble.addShadow(new Point(2, 2), 80);
             myself.scriptContainer.add(bubble);
             bubble.fullChanged();
             bubble.setTop(2);
