@@ -1,17 +1,39 @@
 # Help Screen XML
 
+Help screen XML files define a screen's structure and untranslated contents.
+
+Any translatable strings should be accompanied by a corresponding entry in
+the translations file (see locale/help-en.js).
+
+For example, this script contains the translatable string "Hello there!":
+```
+<script>
+    <block s="bubble">
+        <l>Hello there!</l>
+    </block>
+</script>
+```
+It is accompanied by this entry in the translations file:
+```
+'Hello there!':
+        'Hello there!',
+```
+
+Since paragraphs are often long, they are referred to by a short translation
+ID:
+```
+<p id="loremscreen.p.1"/>
+```
+In the translations file:
+```
+    'loremscreen.p.1':
+        'Lorem ipsum dolor sit amet...',
+```
+
 ## Structure
 
 ```
 <help-screen version="1">
-    <libraries>
-        <!-- Optional -->
-        <library filename="bignumbers.xml"/>
-        <!--
-            Put libraries here so their blocks can be used in the help
-            screen.
-        -->
-    </libraries>
     <blocks>
         <!-- Optional -->
         <!--
@@ -49,8 +71,8 @@ arranged:
 ```
 <box color="gray">
     <column>
-        <p>Paragraph 1</p>
-        <p>Paragraph 2</p>
+        <p id="samplescreen.p.1"/>
+        <p id="samplescreen.p.2"/>
     </column>
 </box>
 ```
@@ -135,29 +157,57 @@ Aligns its contents in a column.
 Paragraph elements. `<p>` is normal text, while `<i>` is italic. The default
 font size is 18px, while the small variants are 14px.
 
-These elements can be used in two ways. One:
+These elements can be used in two ways. Simple paragraphs contain just text.
 ```
-<p>This paragraph contains just text.</p>
+<p id="samplescreen.p.1"/>
+```
+In the translations file:
+```
+    'samplescreen.p.1':
+        'This paragraph contains just text.',
 ```
 
-Two:
+Rich paragraphs can contain scripts, images, and text with different
+formatting:
 ```
-<p>
-    <text>This paragraph contains text and other elements</text>
+<p id="samplescreen.p.2">
     <script>
         <block s="forward">
             <l/>
         </block>
     </script>
-    <text>which are inlined. You can make certain text a</text>
-    <text color="red">different color</text>
-    <text>or</text>
-    <text font="Courier">different font</text>
-    <text>.</text>
+    <script>
+        <block s="bounceOffEdge"/>
+    </script>
 </p>
+```
+In the translations file:
+```
+    'samplescreen.p.2':
+        'This paragraph contains the scripts {1} and {2} which are inlined.',
+        // {1} refers to the p element's 1st child (the forward block)
+        // {2} refers to the p element's 2nd child 
+```
+
+You can also refer to child elements by an ID:
+```
+<p id="samplescreen.p.3">
+    <text id="samplescreen.p.3.different color" color="red"/>
+    <text id="samplescreen.p.3.different font" font="Courier"/>
+</p>
+```
+In the translations file:
+```
+    'samplescreen.p.3':
+        'You can make certain text a {samplescreen.p.3.different color} or {samplescreen.p.3.different font}.',
+    'samplescreen.p.3.different color':
+        'different color',
+    'samplescreen.p.3.different font':
+        'different font',
 ```
 | Attribute | Value | Default | Comment |
 | --- | --- | --- | --- |
+| id | a string identifier, with a matching entry in the translations file | none |
 | width | number | none |
 | rel-width | number | 1 | See `<row>`. |
 | color | CSS color | white or black |
