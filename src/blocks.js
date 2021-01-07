@@ -3508,7 +3508,8 @@ BlockMorph.prototype.showHelp = function (lang) {
         comment,
         block,
         spec,
-        padding = 15;
+        padding = 15,
+        request;
 
     lang = lang || SnapTranslator.language;
 
@@ -3579,20 +3580,38 @@ BlockMorph.prototype.showHelp = function (lang) {
             myself.world(),
             sf
         );
-    };
+    }
     
-    ide.getURL(
-        ide.resourceURL('help', 'xml', spec + '.xml'),
-        function (xmlString) {
-            if (xmlString) {
+    function showOldHelp () {
+        var pic = new Image(), help, ctx;
+        pic.onload = () => {
+            help = newCanvas(new Point(pic.width, pic.height), true); // nonRetina
+            ctx = help.getContext('2d');
+            ctx.drawImage(pic, 0, 0);
+            new DialogBoxMorph().inform(
+                'Help',
+                null,
+                myself.world(),
+                help
+            );
+        };
+        pic.src = ide.resourceURL('help', 'old', spec + '.png');
+    }
+
+    request = new XMLHttpRequest();
+    request.open('GET', ide.resourceURL('help', 'xml', spec + '.xml'));
+    request.onreadystatechange = () => {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 new SnapSerializer().loadHelpScreen(
-                    xmlString, ide, showDialog
+                    request.responseText, ide, showDialog
                 );
             } else {
-                ide.showMessage('could not retrieve help screen ' + spec);
+                showOldHelp();
             }
         }
-    );
+    };
+    request.send();
 };
 
 // BlockMorph exporting picture with result bubble
