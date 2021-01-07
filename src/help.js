@@ -1298,9 +1298,11 @@ ScriptDiagramMorph.prototype.populateDiagram = function () {
         }
     });
 
+    displayWidth = Math.ceil(displayWidth);
+    displayHeight = Math.ceil(displayHeight);
     this.scriptContainer.setExtent(new Point(displayWidth, displayHeight));
-    displayWidth *= this.scriptScale;
-    displayHeight *= this.scriptScale;
+    displayWidth = Math.ceil(displayWidth * this.scriptScale);
+    displayHeight = Math.ceil(displayHeight * this.scriptScale);
     this.widthNoBubble *= this.scriptScale;
     // default extent doesn't include annotations
     this.widthNoAnnotations = displayWidth;
