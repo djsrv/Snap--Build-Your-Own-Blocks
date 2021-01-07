@@ -1015,6 +1015,9 @@ RichTextMorph.prototype.fixLayout = function () {
     this.lines.forEach(function (line) {
         height += myself.calculateLineHeight(line) + shadowHeight;
     });
+    if (this.lines.length > 0) {
+        height += this.calculateLineDescent(this.lines[this.lines.length - 1]);
+    }
     if (this.maxWidth === 0) {
         this.bounds = this.bounds.origin.extent(
             new Point(this.maxLineWidth + shadowWidth, height)
@@ -1034,7 +1037,7 @@ RichTextMorph.prototype.fixLayout = function () {
 };
 
 RichTextMorph.prototype.render = function (ctx) {
-    var width, i, j, line, lineHeight, word,
+    var width, i, j, line, lineHeight, lineDescent, word,
     shadowHeight, shadowWidth, offx, offy, x, y,
     defaultColor = this.color.toString();
 
@@ -1044,7 +1047,6 @@ RichTextMorph.prototype.render = function (ctx) {
     // prepare context for drawing text
     ctx.font = this.font();
     ctx.textAlign = 'left';
-    ctx.textBaseline = 'bottom';
 
     // fill the background, if desired
     if (this.backgroundColor) {
@@ -1070,6 +1072,7 @@ RichTextMorph.prototype.render = function (ctx) {
             x = 0;
         }
         lineHeight = this.calculateLineHeight(line);
+        lineDescent = this.calculateLineDescent(line);
         y += lineHeight / 2;
         for (j = 0; j < line.length; j = j + 1) {
             word = line[j];
@@ -1077,6 +1080,7 @@ RichTextMorph.prototype.render = function (ctx) {
                 word.setPosition(this.position().add(new Point(
                     x + offx, 
                     y - (this.calculateWordHeight(word) / 2) + offy
+                        + lineDescent
                 )));
             } else {
                 ctx.font = this.font(word.font);
@@ -1096,7 +1100,9 @@ RichTextMorph.prototype.calculateWordWidth = function (word) {
     var canvas = newCanvas(),
         context = canvas.getContext('2d');
     context.font = this.font(word.font);
-    if (word instanceof Morph) {
+    if (word instanceof BlockMorph) {
+        return word.stackFullBounds().width();
+    } else if (word instanceof Morph) {
         return word.width();
     }
     return context.measureText(word.text || word).width;
@@ -1125,6 +1131,27 @@ RichTextMorph.prototype.calculateLineHeight = function (line) {
         height = Math.max(height, myself.calculateWordHeight(word));
     });
     return height;
+};
+
+RichTextMorph.prototype.calculateFontDescent = function (font) {
+    // measure the height of the tail in 'q'
+    var canvas = newCanvas(),
+        context = canvas.getContext('2d');
+    context.font = this.font(font);
+    return context.measureText('q').actualBoundingBoxDescent || 0;
+};
+
+RichTextMorph.prototype.calculateLineDescent = function (line) {
+    var fontDescents = {}, maxDescent;
+    fontDescents[this.fontName] = this.calculateFontDescent(this.fontName);
+    maxDescent = fontDescents[this.fontName];
+    line.forEach((word) => {
+        if (word.font && !fontDescents.hasOwnProperty(word.font)) {
+            fontDescents[word.font] = this.calculateFontDescent(word.font);
+            maxDescent = Math.max(maxDescent, fontDescents[word.font]);
+        }
+    });
+    return maxDescent;
 };
 
 // ScriptDiagramMorph ///////////////////////////////////////////////////
