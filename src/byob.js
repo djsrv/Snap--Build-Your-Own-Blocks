@@ -464,13 +464,16 @@ CustomBlockDefinition.prototype.isDirectlyRecursive = function () {
 // CustomBlockDefinition localizing, highly experimental
 
 CustomBlockDefinition.prototype.localizedSpec = function (forHelpProto) {
-	if (this.cachedTranslation) {return this.cachedTranslation; }
+	if (!forHelpProto && this.cachedTranslation) {
+        return this.cachedTranslation;
+    }
 
 	var loc = this.translations[SnapTranslator.language],
 		sem = this.blockSpec(),
         locParts,
   		inputs,
-    	i = -1;
+        i = -1,
+        translation;
 
 	function isInput(str) {
     	return (str.length > 1) && (str[0] === '%');
@@ -486,7 +489,7 @@ CustomBlockDefinition.prototype.localizedSpec = function (forHelpProto) {
 	if (locParts.some(str => isInput(str)) ||
  			(locParts.filter(str => str === '_').length !== inputs.length)
     ) {
- 		this.cachedTranslation = sem;
+ 		translation = sem;
     } else {
 		// substitute each input place holder with its semantic spec part
 		locParts = locParts.map(str => {
@@ -496,9 +499,12 @@ CustomBlockDefinition.prototype.localizedSpec = function (forHelpProto) {
   			}
     		return str;
 		});
- 		this.cachedTranslation = locParts.join(' ');
-   	}
-  	return this.cachedTranslation;
+ 		translation = locParts.join(' ');
+    }
+    if (!forHelpProto) {
+        this.cachedTranslation = translation;
+    }
+    return translation;
 };
 
 CustomBlockDefinition.prototype.abstractBlockSpec = function () {
