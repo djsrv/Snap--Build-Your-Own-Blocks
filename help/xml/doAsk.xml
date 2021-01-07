@@ -1,0 +1,47 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doAsk">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doAsk" annotation="1">
+                        <l>What is your name?</l>
+                    </block>
+                    <block s="doSayFor" annotation="2">
+                        <l>It's nice to meet you.</l>
+                        <l>2</l>
+                    </block>
+                    <block s="doSayFor" annotation="3">
+                        <block s="reportLastAnswer" />
+                        <l>2</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doAsk.p.1" />
+                    <small-p id="doAsk.p.2" />
+                    <small-p id="doAsk.p.3" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doAsk.p.4">
+                <script>
+                    <block s="doAsk">
+                        <l />
+                    </block>
+                </script>
+                <script>
+                    <block s="reportLastAnswer" />
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

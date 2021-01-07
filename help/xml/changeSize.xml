@@ -1,0 +1,43 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="changeSize">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <diagram rel-width="1">
+                <script>
+                    <block s="setSize" annotation="1">
+                        <l>1</l>
+                    </block>
+                    <block s="down" />
+                    <block s="doRepeat" annotation="2">
+                        <l>100</l>
+                        <script>
+                            <block s="forward" annotation="3">
+                                <l>5</l>
+                            </block>
+                            <block s="turn" annotation="4">
+                                <l>3</l>
+                            </block>
+                            <block s="changeSize" annotation="5">
+                                <l>1</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="changeSize.p.1" />
+                    <small-p id="changeSize.p.2" />
+                    <small-p id="changeSize.p.3" />
+                    <small-p id="changeSize.p.4" />
+                    <small-p id="changeSize.p.5" />
+                </annotations>
+            </diagram>
+            <img src="changeSize_cat.png" width="140" height="159" />
+        </row>
+    </box>
+</help-screen>

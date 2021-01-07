@@ -1,0 +1,88 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportRelationTo">
+                <l><option>distance</option></l>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doForever">
+                        <script>
+                            <block s="doIf" annotation="1">
+                                <block s="reportLessThan">
+                                    <block s="reportRelationTo">
+                                        <l><option>distance</option></l>
+                                        <l>dog</l>
+                                    </block>
+                                    <l>20</l>
+                                </block>
+                                <script>
+                                    <block s="doSwitchToCostume" annotation="2">
+                                        <l>scared cat</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportRelationTo.p.1" />
+                    <small-p id="reportRelationTo.p.2" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="reportRelationTo">
+                        <l menu="1"><option>distance</option></l>
+                        <l />
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item annotation="1">distance</item>
+                        <item>direction</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p id="reportRelationTo.p.3">
+		      <script><block s="direction" /></script>
+		      </small-p>
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportRelationTo.p.4" />
+            <diagram>
+                <script>
+                    <block s="reportRelationTo" annotation="1">
+                        <l><option>distance</option></l>
+                        <l><option>mouse-pointer</option></l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportRelationTo.p.5">
+                        <img src="pointer.png" width="8" height="13" />
+                        </small-p>
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="reportRelationTo" annotation="1">
+                        <l><option>distance</option></l>
+                        <l>Sprite(2)</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportRelationTo.p.6" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

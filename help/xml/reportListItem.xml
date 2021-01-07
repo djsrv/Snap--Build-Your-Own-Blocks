@@ -1,0 +1,73 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportListItem">
+                <l>1</l>
+                <l>list</l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="bubble" annotation="1">
+                        <block s="reportListItem">
+                            <l><option>any</option></l>
+                            <block var="phrases" />
+                        </block>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportListItem.p.1" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doIf" annotation="1">
+                        <block s="reportGreaterThan">
+                            <block var="score" />
+                            <block s="reportListItem">
+                                <l>1</l>
+                                <block var="top scores" />
+                            </block>
+                        </block>
+                        <script>
+                            <block s="playSound" annotation="2">
+                                <l>clap</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportListItem.p.2" />
+                    <small-p id="reportListItem.p.3" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportListItem.p.4" />
+            <diagram>
+                <script>
+                    <block s="reportListItem">
+                        <l menu="1" annotation="1">1</l>
+                        <block var="my list" />
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item>1</item>
+                        <item>last</item>
+                        <item>any</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p id="reportListItem.p.5" />
+                </annotations>
+            </diagram>
+            <p id="reportListItem.p.6" />
+        </column>
+    </box>
+</help-screen>

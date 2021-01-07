@@ -1,0 +1,39 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportGetSoundAttribute">
+                <l><option>duration</option></l>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportGetSoundAttribute.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportGetSoundAttribute">
+                        <l menu="1"><option>duration</option></l>
+                        <l />
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item>name</item>
+                        <item annotation="1">duration</item>
+                        <item annotation="2">length</item>
+                        <item annotation="3">number of channels</item>
+                        <item>sample rate</item>
+                        <item annotation="4">samples</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p id="reportGetSoundAttribute.p.1" />
+		    <small-p id="reportGetSoundAttribute.p.2" />
+                    <small-p arrow-horizontal="true" id="reportGetSoundAttribute.p.3" />
+                    <small-p id="reportGetSoundAttribute.p.4" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

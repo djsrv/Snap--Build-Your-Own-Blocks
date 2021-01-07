@@ -1,0 +1,51 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportListContainsItem">
+                <l>list</l>
+                <l>thing</l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doIfElse" annotation="1">
+                        <block s="reportListContainsItem">
+                            <block var="my list" />
+                            <l>banana</l>
+                        </block>
+                        <script>
+                            <block s="bubble" annotation="2">
+                                <l>You have a banana.</l>
+                            </block>
+                        </script>
+                        <script>
+                            <block s="bubble" annotation="3">
+                                <l>You do not have a banana.</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportListContainsItem.p.1" />
+                    <small-p id="reportListContainsItem.p.2" />
+                    <small-p id="reportListContainsItem.p.3" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportListContainsItem.p.4">
+                <script>
+                    <block s="reportListContainsItem">
+                        <l>list</l>
+                        <l>thing</l>
+                    </block>
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

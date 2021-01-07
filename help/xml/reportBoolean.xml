@@ -1,0 +1,133 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="square %'size' %'pendown'" type="command" category="motion">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%n" />
+                <input type="%b" />
+            </inputs>
+            <script>
+                <block s="doIf">
+                    <block var="pendown" />
+                    <script>
+                        <block s="down" />
+                    </script>
+                </block>
+                <block s="doRepeat">
+                    <l>4</l>
+                    <script>
+                        <block s="forward">
+                            <block var="size" />
+                        </block>
+                        <block s="turn">
+                            <l>90</l>
+                        </block>
+                    </script>
+                </block>
+            </script>
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <row>
+            <script>
+                <block s="reportBoolean">
+                    <l><bool>true</bool></l>
+                </block>
+            </script>
+            <script>
+                <block s="reportBoolean">
+                    <l><bool>false</bool></l>
+                </block>
+            </script>
+        </row>
+    </thumbnail>
+    <header id="reportBoolean.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportBoolean" annotation="1">
+                        <l><bool>true</bool></l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportBoolean.p.1" />
+                </annotations>
+            </diagram>
+            <row>
+                <block-definition s="square %n %b" />
+                <column>
+                    <diagram>
+                        <script>
+                            <custom-block s="square %n %b" annotation="1">
+                                <l>100</l>
+                                <l><bool>true</bool></l>
+                            </custom-block>
+                        </script>
+                        <annotations>
+                            <small-p id="reportBoolean.p.2" />
+                        </annotations>
+                    </diagram>
+                    <diagram>
+                        <script>
+                            <custom-block s="square %n %b" annotation="1">
+                                <l>100</l>
+                                <l><bool>false</bool></l>
+                            </custom-block>
+                        </script>
+                        <annotations>
+                            <small-p id="reportBoolean.p.3" />
+                        </annotations>
+                    </diagram>
+                </column>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportBoolean.p.4" />
+            <diagram>
+                <script>
+                    <block s="doIfElse" annotation="1">
+                        <block s="reportEquals">
+                            <block var="foo" />
+                            <l>0</l>
+                        </block>
+                        <script>
+                            <block s="doReport">
+                                <block s="reportBoolean">
+                                    <l><bool>true</bool></l>
+                                </block>
+                            </block>
+                        </script>
+                        <script>
+                            <block s="doReport">
+                                <block s="reportBoolean">
+                                    <l><bool>false</bool></l>
+                                </block>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportBoolean.p.5" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doReport" annotation="1">
+                        <block s="reportEquals">
+                            <block var="foo" />
+                            <l>0</l>
+                        </block>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportBoolean.p.6" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

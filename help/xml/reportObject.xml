@@ -1,0 +1,34 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportObject">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportObject.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportObject" bubble="1">
+                        <l menu="1">Red</l>
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+		        <item>Myself</item>
+                        <item>Stage</item>
+                        <line />
+                        <item>Purple</item>
+                        <item>Red</item>
+                        <item>Sprite(3)</item>
+                    </menu>
+                </menus>
+                <bubbles>
+                    <img src="reportObject_turtle.png" width="46" height="41" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

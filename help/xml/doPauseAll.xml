@@ -1,0 +1,32 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doPauseAll" />
+        </script>
+    </thumbnail>
+    <header id="doPauseAll.header" />
+    <box color="gray">
+        <column>
+            <p id="doPauseAll.p.1">
+                <img src="doPauseAll_pause.png" width="33" height="20" />
+                <img src="doPauseAll_play.png" width="33" height="20" />
+                </p>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doPauseAll.p.2" />
+            <script>
+                <block s="doIf">
+                    <block s="reportLessThan">
+                        <block s="xPosition" />
+                        <l>0</l>
+                    </block>
+                    <script>
+                        <block s="doPauseAll" />
+                    </script>
+                </block>
+            </script>
+        </column>
+    </box>
+</help-screen>

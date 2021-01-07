@@ -1,0 +1,41 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportVideo">
+                <l><option>motion</option></l>
+                <l><option>myself</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportVideo.header" />
+    <box color="gray">
+        <column>
+            <p id="reportVideo.p.1" />
+            <p id="reportVideo.p.2" />
+        </column>
+    </box>
+    <box color="blue">
+        <diagram>
+            <script>
+                <block s="reportVideo">
+                    <l menu="1"><option>motion</option></l>
+                    <l><option>myself</option></l>
+                </block>
+            </script>
+            <menus>
+                <menu>
+                    <item annotation="1">snap</item>
+                    <item annotation="2">motion</item>
+                    <item annotation="3">direction</item>
+                </menu>
+            </menus>
+            <annotations>
+                <small-p id="reportVideo.p.3" />
+                <small-p id="reportVideo.p.4" />
+                <small-p id="reportVideo.p.5">
+                    <text font="Courier" id="reportVideo.p.5.point in direction" />
+                    </small-p>
+            </annotations>
+        </diagram>
+    </box>
+</help-screen>

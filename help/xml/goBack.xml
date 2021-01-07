@@ -1,0 +1,30 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="goBack">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <row>
+                <column rel-width="1">
+                    <img src="goBack_before.png" width="109" height="108" />
+                    <p id="goBack.p.1" />
+                </column>
+                <column rel-width="2">
+                    <p id="goBack.p.2">
+                        <script>
+                            <block s="goBack">
+                                <l>4</l>
+                            </block>
+                        </script>
+                    </p>
+                </column>
+                <img src="goBack_after.png" width="109" height="108" />
+            </row>
+            <p id="goBack.p.3" />
+        </column>
+    </box>
+</help-screen>

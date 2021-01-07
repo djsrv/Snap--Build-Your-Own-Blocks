@@ -1,0 +1,53 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportAudio">
+                <l><option>volume</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportAudio.header" />
+    <box color="gray">
+        <column>
+            <p id="reportAudio.p.1" />
+            <diagram>
+                <script>
+                    <block s="reportAudio">
+                        <l menu="1"><option>volume</option></l>
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item color="orange" annotation="1">volume</item>
+                        <item color="orange">note</item>
+                        <item color="orange">frequency</item>
+                        <item color="lime" annotation="2">samples</item>
+                        <item color="lime">sample rate</item>
+                        <item color="cyan" annotation="3">spectrum</item>
+                        <item color="cyan">resolution</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p arrow-color="orange" id="reportAudio.p.2" />
+                    <small-p arrow-color="lime" id="reportAudio.p.3" />
+                    <small-p arrow-color="cyan" id="reportAudio.p.4" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportAudio.p.5" />
+            <row>
+                <column rel-width="1">
+                    <img src="reportAudio_tuning_fork.png" width="207" height="72" />
+                    <p id="reportAudio.p.6" />
+                </column>
+                <column rel-width="1">
+                    <img src="reportAudio_instrument.png" width="203" height="72" />
+                    <p id="reportAudio.p.7" />
+                </column>
+            </row>
+        </column>
+    </box>
+</help-screen>

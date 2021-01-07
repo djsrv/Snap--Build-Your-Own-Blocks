@@ -1,0 +1,41 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="goToLayer">
+                <l><option>front</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <column rel-width="1">
+                <img src="goToLayer_before.png" width="56" height="93" />
+                <p id="goToLayer.p.1" />
+                <p id="goToLayer.p.2" />
+            </column>
+            <column rel-width="3">
+                <p id="goToLayer.p.3">
+                    <script>
+                        <block s="goToLayer">
+                            <l><option>front</option></l>
+                        </block>
+                    </script>
+                </p>
+                <diagram>
+                <script>	
+                    <block s="goToLayer">
+                        <l menu="1"><option /></l>
+                        </block>
+                    </script>
+                    <menus>
+                        <menu>
+                        <item>front</item>
+                        <item>back</item>
+                        </menu>
+                    </menus>
+                </diagram>
+            </column>
+            <img src="goToLayer_after.png" width="53" height="88" />
+        </row>
+    </box>
+</help-screen>

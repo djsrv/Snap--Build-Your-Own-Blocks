@@ -1,0 +1,89 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="some function %'s'" type="reporter" category="looks">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%s" />
+            </inputs>
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <script>
+            <custom-block s="list $arrowRight sentence %l">
+                <l />
+            </custom-block>
+        </script>
+    </thumbnail>
+    <header id="list$arrowRightsentence.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <custom-block s="list $arrowRight sentence %l" bubble="1">
+                        <block s="reportNewList">
+                            <list>
+                                <l>Build</l>
+                                <l>Your</l>
+                                <l>Own</l>
+                                <l>Blocks</l>
+                            </list>
+                        </block>
+                    </custom-block>
+                </script>
+            </diagram>
+            <bubbles>
+                <text id="Build Your Own Blocks" />
+            </bubbles>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="list$arrowRightsentence.p.1">
+                <script>
+                    <custom-block s="list $arrowRight sentence %l">
+                        <block s="reportMap">
+                            <block s="reifyReporter">
+                                <autolambda>
+                                    <custom-block s="some function %s">
+                                        <l />
+                                    </custom-block>
+                                </autolambda>
+                                <list />
+                            </block>
+                            <custom-block s="sentence $arrowRight list %txt">
+                                <l>a bunch of words</l>
+                            </custom-block>
+                        </block>
+                    </custom-block>
+                </script>
+                </p>
+            <diagram>
+                <script scale="0.9">
+                    <custom-block s="list $arrowRight sentence %l" bubble="1">
+                        <block s="reportMap">
+                            <block s="reifyReporter">
+                                <autolambda>
+                                    <block s="reportJoinWords">
+                                        <list>
+                                            <l />
+                                            <l>s</l>
+                                        </list>
+                                    </block>
+                                </autolambda>
+                                <list />
+                            </block>
+                            <custom-block s="sentence $arrowRight list %txt">
+                                <l>boy ear thing</l>
+                            </custom-block>
+                        </block>
+                    </custom-block>
+                </script>
+                <bubbles>
+                    <text id="boys ears things" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

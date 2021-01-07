@@ -1,0 +1,44 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="bubble">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <diagram rel-width="1">
+                <script>
+                    <block s="bubble" annotation="1">
+                        <l>Hello there!</l>
+                    </block>
+                    <block s="doWait" annotation="2">
+                        <l>1</l>
+                    </block>
+                    <block s="bubble" annotation="3">
+                        <l />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="bubble.p.1" />
+                    <small-p id="bubble.p.2" />
+                    <small-p id="bubble.p.3" />
+                </annotations>
+            </diagram>
+            <img src="bubble_cats.png" width="118" height="129" />
+        </row>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="bubble.p.4">
+                <script>
+                    <block s="bubble">
+                        <l />
+                    </block>
+                </script>
+            </p>
+            <p id="bubble.p.5" />
+        </column>
+    </box>
+</help-screen>

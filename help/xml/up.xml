@@ -1,0 +1,30 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="up" />
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <diagram rel-width="1">
+                <script>
+                    <block s="down" annotation="1" />
+                    <block s="forward" annotation="2">
+                        <l>80</l>
+                    </block>
+                    <block s="up" annotation="3" />
+                    <block s="forward" annotation="4">
+                        <l>80</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="up.p.1" />
+                    <small-p id="up.p.2" />
+                    <small-p id="up.p.3" />
+                    <small-p id="up.p.4" />
+                </annotations>
+            </diagram>
+            <img src="up_cat.png" width="44" height="138" />
+        </row>
+    </box>
+</help-screen>

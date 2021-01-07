@@ -1,0 +1,22 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doPlaySoundAtRate">
+                <l />
+                <l>44100</l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <p id="doPlaySoundAtRate.p.1" />
+            <p id="doPlaySoundAtRate.p.2" />
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doPlaySoundAtRate.p.3" />
+            <p id="doPlaySoundAtRate.p.4" />
+        </column>
+    </box>
+</help-screen>

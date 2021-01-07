@@ -1,0 +1,71 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="show picture %'bitmap'" type="command" category="looks">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%l" />
+            </inputs>
+            <script />
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <script>
+            <block s="reportGetImageAttribute">
+                <l><option>width</option></l>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <diagram>
+            <script>
+                <block s="reportGetImageAttribute">
+                    <l menu="1"><option>width</option></l>
+                    <l menu="2" />
+                </block>
+            </script>
+            <menus>
+                <menu>
+                    <item>width</item>
+                    <item>height</item>
+                    <item>pixels</item>
+                </menu>
+                <menu>
+                    <item>Turtle</item>
+                    <item>current</item>
+                    <line />
+                    <item>alonzo</item>
+                    <item>ballerina</item>
+                    <item>bear2</item>
+                    <item>blue</item>
+                </menu>
+            </menus>
+        </diagram>
+        <diagram x="100">
+            <script>
+                <block s="reportGetImageAttribute" bubble="1">
+                    <l><option>pixels</option></l>
+                    <l>costume</l>
+                </block>
+            </script>
+            <bubbles>
+                <img src="reportGetImageAttribute_table.png" width="156" height="214" />
+            </bubbles>
+        </diagram>
+    </box>
+    <box color="blue">
+        <column>
+            <header id="reportGetImageAttribute.header" />
+            <p id="reportGetImageAttribute.p.1" />
+            <p id="reportGetImageAttribute.p.2">
+                <script>
+                    <custom-block s="show picture %l">
+                        <l />
+                    </custom-block>
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

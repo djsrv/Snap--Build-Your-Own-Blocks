@@ -1,0 +1,92 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportUnicode">
+                <l>a</l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportUnicode.header" />
+    <box color="gray">
+        <column>
+            <p id="reportUnicode.p.1" />
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l>a</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>97</text>
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l>7</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>55</text>
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l> </l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>32</text>
+                    </bubbles>
+                </diagram>
+            </row>
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l>π</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>960</text>
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l>≤</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>8804</text>
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicode" bubble="1">
+                            <l>∞</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>8734</text>
+                    </bubbles>
+                </diagram>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <column rel-width="2">
+                <small-p id="reportUnicode.p.2" />
+                <small-p id="reportUnicode.p.3" />
+                <small-p id="reportUnicode.p.4" />
+            </column>
+            <column rel-width="5">
+                <p id="reportUnicode.p.5" />
+                <small-p id="reportUnicode.p.6" />
+            </column>
+        </row>
+    </box>
+</help-screen>

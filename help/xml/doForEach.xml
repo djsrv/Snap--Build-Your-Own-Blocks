@@ -1,0 +1,76 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doForEach">
+                <l>item</l>
+                <l />
+                <script />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="doForEach.header" />
+    <box color="gray">
+        <column>
+            <row>
+                <column rel-width="5">
+                    <diagram>
+                        <script>
+                            <block s="doForEach">
+                                <l>item</l>
+                                <block s="reportNewList">
+                                    <list>
+                                        <l>Yakko</l>
+                                        <l>Wakko</l>
+                                        <l>Dot</l>
+                                    </list>
+                                </block>
+                                <script>
+                                    <block s="doSayFor">
+                                        <block s="reportJoinWords">
+                                            <list>
+                                                <l>Hello </l>
+                                                <l highlight="true" />
+                                            </list>
+                                        </block>
+                                        <l>2</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </diagram>
+                    <diagram>
+                        <script>
+                            <block s="doForEach">
+                                <l arrow-start="1">item</l>
+                                <block s="reportNewList">
+                                    <list>
+                                        <l>Yakko</l>
+                                        <l>Wakko</l>
+                                        <l>Dot</l>
+                                    </list>
+                                </block>
+                                <script>
+                                    <block s="doSayFor">
+                                        <block s="reportJoinWords">
+                                            <list>
+                                                <l>Hello </l>
+                                                <block var="item" highlight="true" arrow-end="1" />
+                                            </list>
+                                        </block>
+                                        <l>2</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </diagram>
+                </column>
+                <p rel-width="4" id="doForEach.p.1" />
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <img src="doForEach_alonzo.png" width="324" height="112" />
+        </column>
+    </box>
+</help-screen>

@@ -1,0 +1,110 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportKeep">
+                <block s="reifyPredicate">
+                    <script />
+                    <list />
+                </block>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportKeep" bubble="1">
+                        <block s="reifyPredicate">
+                            <autolambda>
+                                <block s="reportIsA">
+                                    <l />
+                                    <l><option>number</option></l>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <block s="reportNewList">
+                            <list>
+                                <l>4</l>
+                                <l>calling</l>
+                                <l>birds</l>
+                                <l>3</l>
+                                <l>french</l>
+                                <l>hens</l>
+                                <l>2</l>
+                                <l>turtle</l>
+                                <l>doves</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportKeep_list1.png" width="80" height="70" />
+                </bubbles>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="reportKeep" bubble="1">
+                        <block s="reifyPredicate">
+                            <autolambda>
+                                <block s="reportGreaterThan">
+                                    <block s="reportStringSize">
+                                        <l />
+                                    </block>
+                                    <l>3</l>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <block s="reportNewList">
+                            <list>
+                                <l>the</l>
+                                <l>University</l>
+                                <l>of</l>
+                                <l>California</l>
+                                <l>at</l>
+                                <l>Berkeley</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportKeep_list2.png" width="82" height="70" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportKeep.p.1">
+                <script>
+                    <block s="reportBoolean">
+                        <l><bool>true</bool></l>
+                    </block>
+                </script>
+                </p>
+            <diagram>
+                <script>
+                    <block s="reportKeep">
+                        <block s="reifyPredicate">
+                            <autolambda>
+                                <block s="reportIsA">
+                                    <l highlight="true">5</l>
+                                    <l><option>number</option></l>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <block s="reportNewList">
+                            <list>
+                                <l>...</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+            </diagram>
+            <p id="reportKeep.p.2" />
+        </column>
+    </box>
+</help-screen>

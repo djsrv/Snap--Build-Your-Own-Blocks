@@ -1,0 +1,57 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doWarp">
+                <script />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="doWarp.header" />
+    <box color="black">
+        <column>
+            <row padding="22">
+                <script>
+                    <block s="doRepeat">
+                        <l>4</l>
+                        <script>
+                            <block s="forward">
+                                <l>100</l>
+                            </block>
+                            <block s="turn">
+                                <l>90</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <img src="doWarp_steps1.png" width="365" height="62" />
+            </row>
+            <row>
+                <script>
+                    <block s="doWarp">
+                        <script>
+                            <block s="doRepeat">
+                                <l>4</l>
+                                <script>
+                                    <block s="forward">
+                                        <l>100</l>
+                                    </block>
+                                    <block s="turn">
+                                        <l>90</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <img src="doWarp_steps2.png" width="138" height="61" />
+                <p rel-width="1" id="doWarp.p.1" />
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doWarp.p.2" />
+            <img src="doWarp_ide.png" width="514" height="61" />
+        </column>
+    </box>
+</help-screen>

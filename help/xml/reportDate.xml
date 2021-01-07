@@ -1,0 +1,63 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportDate">
+                <l><option>date</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportDate.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <menu>
+                    <item annotation="1">year</item>
+                    <item annotation="2">month</item>
+                    <item annotation="3">date</item>
+                    <item annotation="4">day of week</item>
+                    <item annotation="5">hour</item>
+                    <item annotation="6">minute</item>
+                    <item annotation="7">seconds</item>
+                    <item annotation="8">time in milliseconds</item>
+                </menu>
+                <annotations>
+                    <small-p id="reportDate.p.1" />
+                    <small-p id="reportDate.p.2" />
+                    <small-p id="reportDate.p.3" />
+                    <small-p arrow-horizontal="true" id="reportDate.p.4" />
+                    <small-p id="reportDate.p.5" />
+                    <small-p id="reportDate.p.6" />
+                    <small-p id="reportDate.p.7" />
+                    <small-p id="reportDate.p.8" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportDate.p.9" />
+            <diagram>
+                <script>
+                    <block s="reportJoinWords" bubble="1">
+                        <list>
+                            <block s="reportDate">
+                                <l><option>month</option></l>
+                            </block>
+                            <l>/</l>
+                            <block s="reportDate">
+                                <l><option>date</option></l>
+                            </block>
+                            <l>/</l>
+                            <block s="reportDate">
+                                <l><option>year</option></l>
+                            </block>
+                        </list>
+                    </block>
+                </script>
+                <bubbles>
+                    <text>5/25/2015</text>
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

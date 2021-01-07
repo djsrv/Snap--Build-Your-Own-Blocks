@@ -1,0 +1,69 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportLastAnswer" />
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doAsk" annotation="1">
+                        <l>Do you want an apple or orange?</l>
+                    </block>
+                    <block s="doIf" annotation="2">
+                        <block s="reportEquals">
+                            <block s="reportLastAnswer" />
+                            <l>apple</l>
+                        </block>
+                        <script>
+                            <block s="doSwitchToCostume" annotation="3">
+                                <l>holding an apple</l>
+                            </block>
+                        </script>
+                    </block>
+                    <block s="doIf" annotation="4">
+                        <block s="reportEquals">
+                            <block s="reportLastAnswer" />
+                            <l>orange</l>
+                        </block>
+                        <script>
+                            <block s="doSwitchToCostume" annotation="5">
+                                <l>holding an orange</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="getLastAnswer.p.1" />
+                    <small-p id="getLastAnswer.p.2" />
+                    <small-p id="getLastAnswer.p.3" />
+                    <small-p id="getLastAnswer.p.4" />
+                    <small-p id="getLastAnswer.p.5" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="getLastAnswer.p.6">
+                <script>
+                    <block s="doAsk">
+                        <l />
+                    </block>
+                </script>
+                <script>
+                    <block s="reportLastAnswer" />
+                </script>
+                </p>
+            <p id="getLastAnswer.p.7">
+                <script>
+                    <block s="doSetVar">
+                        <l>your name</l>
+                        <block s="reportLastAnswer" />
+                    </block>
+                </script>
+            </p>
+        </column>
+    </box>
+</help-screen>

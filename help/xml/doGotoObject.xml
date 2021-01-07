@@ -1,0 +1,51 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doGotoObject">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doGotoObject" annotation="1">
+                        <l menu="1" />
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item annotation="2">random position</item>
+                        <item annotation="3">mouse-pointer</item>
+                        <item annotation="4">center</item>
+                        <line />
+                        <item annotation="5">Sprite(2)</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p id="doGotoObject.p.1" />
+                    <small-p id="doGotoObject.p.2" />
+                    <small-p arrow-horizontal="true" id="doGotoObject.p.3" />
+                    <small-p id="doGotoObject.p.4" />
+                    <small-p id="doGotoObject.p.5" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doGotoObject" annotation="1">
+                        <block s="reportNewList">
+                            <list>
+                                <l>20</l>
+                                <l>-100</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doGotoObject.p.6" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

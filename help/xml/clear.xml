@@ -1,0 +1,24 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="clear" />
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="clear" annotation="1" />
+                </script>
+                <annotations>
+                    <p id="clear.p.1" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="clear.p.2" />
+        </column>
+    </box>
+</help-screen>

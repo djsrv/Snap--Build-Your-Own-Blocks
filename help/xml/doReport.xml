@@ -1,0 +1,102 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="absolute value of %'num'" type="reporter" category="operators">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%s" />
+            </inputs>
+            <script>
+                <block s="doIf">
+                    <block s="reportLessThan">
+                        <block var="num" />
+                        <l>0</l>
+                    </block>
+                    <script>
+                        <block s="doReport" annotation="1">
+                            <block s="reportDifference">
+                                <l />
+                                <block var="num" />
+                            </block>
+                        </block>
+                    </script>
+                </block>
+                <block s="doReport" annotation="2">
+                    <block var="num" />
+                </block>
+            </script>
+        </block-definition>
+        <block-definition s="empty? %'data'" type="predicate" category="lists">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%l" />
+            </inputs>
+            <script>
+                <block s="doReport">
+                    <block s="reportEquals">
+                        <block var="data" />
+                        <block s="reportNewList">
+                            <list />
+                        </block>
+                    </block>
+                </block>
+            </script>
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <script>
+            <block s="doReport">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="doReport.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <block-definition s="absolute value of %s" />
+                <annotations>
+                    <small-p id="doReport.p.1">
+                        <script>
+                            <block s="doReport">
+                                <l />
+                            </block>
+                        </script>
+                        </small-p>
+                    <small-p id="doReport.p.2">
+                        <script>
+                            <block s="doReport">
+                                <l />
+                            </block>
+                        </script>
+                        </small-p>
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <custom-block s="absolute value of %s" bubble="1">
+                        <l>-7.5</l>
+                    </custom-block>
+                </script>
+                <bubbles>
+                    <text>7.5</text>
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <block-definition s="empty? %l" />
+            <p rel-width="1" id="doReport.p.3">
+                <script>
+                    <block s="doReport">
+                        <l />
+                    </block>
+                </script>
+                </p>
+        </row>
+    </box>
+</help-screen>

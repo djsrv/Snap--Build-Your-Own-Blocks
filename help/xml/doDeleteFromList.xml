@@ -1,0 +1,68 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doDeleteFromList">
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="bubble" annotation="1">
+                        <block s="reportListItem">
+                            <l><option>last</option></l>
+                            <block var="supplies" />
+                        </block>
+                        <l>2</l>
+                    </block>
+                    <block s="doDeleteFromList" annotation="2">
+                        <l><option>last</option></l>
+                        <block var="supplies" />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doDeleteFromList.p.1" />
+                    <small-p id="doDeleteFromList.p.2" />
+                </annotations>
+            </diagram>
+            <row>
+                <column rel-width="1">
+                    <p id="doDeleteFromList.p.3" />
+                    <img src="doDeleteFromList_supplies_before.png" width="105" height="106" />
+                </column>
+                <column rel-width="1">
+                    <p id="doDeleteFromList.p.4" />
+                    <img src="doDeleteFromList_supplies_after.png" width="105" height="93" />
+                </column>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doDeleteFromList.p.5" />
+            <script>
+                <block s="doDeleteFromList">
+                    <l>2</l>
+                    <block var="my list" />
+                </block>
+            </script>
+            <p id="doDeleteFromList.p.6" />
+            <script>
+                <block s="doDeleteFromList">
+                    <l><option>last</option></l>
+                    <block var="my list" />
+                </block>
+            </script>
+            <p id="doDeleteFromList.p.7" />
+            <script>
+                <block s="doDeleteFromList">
+                    <l><option>all</option></l>
+                    <block var="my list" />
+                </block>
+            </script>
+        </column>
+    </box>
+</help-screen>

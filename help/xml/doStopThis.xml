@@ -1,0 +1,58 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doStopThis">
+                <l><option>all</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="doStopThis.header" />
+    <box color="gray">
+        <column>
+            <row>
+                <diagram rel-width="2">
+                    <script>
+                        <block s="doStopThis" annotation="1">
+                            <l menu="1" />
+                        </block>
+                    </script>
+                    <menus>
+                        <menu>
+                            <item>all</item>
+                            <item>this script</item>
+                            <item>this block</item>
+                            <item>all but this script</item>
+                            <item>other scripts in sprite</item>
+                        </menu>
+                    </menus>
+                </diagram>
+                <column rel-width="3">
+                    <small-p id="doStopThis.p.1">
+                        <img src="doStopThis_stop.png" width="21" height="12" />
+                        </small-p>
+                    <small-p id="doStopThis.p.2" />
+                    <small-p id="doStopThis.p.3" />
+                    <small-p id="doStopThis.p.4" />
+                    <small-p id="doStopThis.p.5" />
+                </column>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doStopThis.p.6" />
+            <row>
+                <script>
+                    <block s="doStopThis">
+                        <l><option>all</option></l>
+                    </block>
+                </script>
+                <script>
+                    <block s="doStopThis">
+                        <l><option>all but this script</option></l>
+                    </block>
+                </script>
+            </row>
+        </column>
+    </box>
+</help-screen>

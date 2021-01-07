@@ -1,0 +1,70 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportAspect">
+                <l><option>hue</option></l>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportAspect">
+                        <l menu="1"><option>hue</option></l>
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item color="red" annotation="1">hue</item>
+                        <item color="red">saturation</item>
+                        <item color="red">brightness</item>
+                        <item color="red">transparency</item>
+                        <line />
+                        <item color="cyan" annotation="2">sprites</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p arrow-color="red" id="reportAspect.p.1" />
+                    <small-p arrow-color="cyan" id="reportAspect.p.2" />
+                </annotations>
+            </diagram>
+            <row>
+                <img src="changePenHSVA_graph.svg" width="170" height="98" />
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportAspect" bubble="1" annotation="1">
+                            <l><option>sprites</option></l>
+                            <l><option>myself</option></l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportAspect_list.png" width="99" height="98" />
+                    </bubbles>
+                </diagram>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportAspect.p.3" />
+            <diagram>
+                <script>
+                    <block s="reportAspect">
+                        <l><option>hue</option></l>
+                        <block s="reportNewList" annotation="1">
+                            <list>
+                                <l>20</l>
+                                <l>-100</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportAspect.p.4" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

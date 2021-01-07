@@ -1,0 +1,69 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doInsertInList">
+                <l />
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="receiveInteraction" annotation="1">
+                        <l><option>clicked</option></l>
+                    </block>
+                    <block s="doInsertInList" annotation="2">
+                        <l>lamp</l>
+                        <l>1</l>
+                        <block var="my list" />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doInsertInList.p.1" />
+                    <small-p id="doInsertInList.p.2" />
+                </annotations>
+            </diagram>
+            <row>
+                <column rel-width="1">
+                    <p id="doInsertInList.p.3" />
+                    <img src="doInsertInList_my_list_before.png" width="105" height="93" />
+                </column>
+                <column rel-width="1">
+                    <p id="doInsertInList.p.4" />
+                    <img src="doInsertInList_my_list_after.png" width="105" height="93" />
+                </column>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doInsertInList" annotation="1">
+                        <block var="score" />
+                        <l>2</l>
+                        <block var="scoreboard" />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doInsertInList.p.5" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doInsertInList" annotation="1">
+                        <l>Hello, world!</l>
+                        <l><option>any</option></l>
+                        <block var="greetings" />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doInsertInList.p.6" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

@@ -1,0 +1,97 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doTellTo">
+                <l />
+                <block s="reifyScript">
+                    <script />
+                    <list />
+                </block>
+                <list />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doTellTo" annotation="1">
+                        <l>Sprite(3)</l>
+                        <block s="reifyScript">
+                            <script>
+                                <block s="show" />
+                            </script>
+                            <list />
+                        </block>
+                        <list />
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doTellTo.p.1" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doForEach" annotation="1">
+                        <l>sprite</l>
+                            <block s="reportGet">
+                            <l><option>other sprites</option></l>
+                        </block>
+                        <script>
+                            <block s="doTellTo">
+                                <l highlight="true" />
+                                <block s="reifyScript">
+                                    <script>
+                                        <block s="doGotoObject">
+                                            <l><option>center</option></l>
+                                        </block>
+                                    </script>
+                                    <list />
+                                </block>
+                                <list />
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doTellTo.p.2" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doTellTo.p.3" />
+            <diagram>
+                <script>
+                    <block s="doTellTo">
+                        <l>Sprite(2)</l>
+                        <block s="reifyScript">
+                            <script>
+                                <block s="doRepeat">
+                                    <block var="his variable" />
+                                    <script>
+                                        <block s="forward">
+                                            <l arrow-end="1" />
+                                        </block>
+                                        <block s="turn">
+                                            <block s="reportQuotient">
+                                                <l>360</l>
+                                                <block var="his variable" />
+                                            </block>
+                                        </block>
+                                    </script>
+                                </block>
+                            </script>
+                            <list />
+                        </block>
+                        <list>
+                            <block var="my variable" arrow-start="1" arrow-color="black" />
+                        </list>
+                    </block>
+                </script>
+	    </diagram>
+                    <small-p id="doTellTo.p.4" />
+        </column>
+    </box>
+</help-screen>

@@ -1,0 +1,43 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doHideVar">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doHideVar" annotation="1">
+                        <l>score</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doHideVar.p.1" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doShowVar" annotation="1">
+                        <l>score</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doHideVar.p.2" />
+                </annotations>
+            </diagram>
+            <row>
+                <column rel-width="1">
+                    <p id="doHideVar.p.3" />
+                    <img src="doHideVar_stage1.png" width="160" height="76" />
+                </column>
+                <column rel-width="1">
+                    <p id="doHideVar.p.4" />
+                    <img src="doHideVar_stage2.png" width="160" height="76" />
+                </column>
+            </row>
+        </column>
+    </box>
+</help-screen>

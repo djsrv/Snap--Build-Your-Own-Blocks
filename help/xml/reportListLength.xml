@@ -1,0 +1,57 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportListLength">
+                <l>list</l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doSetVar" annotation="1">
+                        <l>counter</l>
+                        <l>1</l>
+                    </block>
+                    <block s="doRepeat" annotation="2">
+                        <block s="reportListLength">
+                            <block var="my list" />
+                        </block>
+                        <script>
+                            <block s="doSayFor" annotation="3">
+                                <block s="reportListItem">
+                                    <block var="counter" />
+                                    <block var="my list" />
+                                </block>
+                                <l>2</l>
+                            </block>
+                            <block s="doChangeVar" annotation="4">
+                                <l>counter</l>
+                                <l>1</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportListLength.p.1" />
+                    <small-p id="reportListLength.p.2" />
+                    <small-p id="reportListLength.p.3" />
+                    <small-p id="reportListLength.p.4" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportListLength.p.5" />
+            <script>
+                <block s="reportListLength">
+                    <block var="my list" />
+                </block>
+            </script>
+            <p id="reportListLength.p.6" />
+            <img src="reportListLength_watcher.png" width="80" height="17" />
+        </column>
+    </box>
+</help-screen>

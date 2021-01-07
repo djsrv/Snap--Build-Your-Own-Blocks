@@ -1,0 +1,16 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="setPan">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="setPan.header" />
+    <box color="gray">
+        <column>
+            <p id="setPan.p.1" />
+            <p color="lime" id="setPan.p.2" />
+        </column>
+    </box>
+</help-screen>

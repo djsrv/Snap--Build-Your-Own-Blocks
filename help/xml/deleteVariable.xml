@@ -1,0 +1,16 @@
+<help-screen version="1">
+    <thumbnail>
+        <img src="deleteVariable_button.png" width="115" height="18" />
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <img src="deleteVariable_menu.png" width="189" height="36" />
+            <small-p rel-width="1" id="deleteVariable.p.1" />
+        </row>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="deleteVariable.p.2" />
+        </column>
+    </box>
+</help-screen>

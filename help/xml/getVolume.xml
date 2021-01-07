@@ -1,0 +1,14 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="getVolume" />
+        </script>
+    </thumbnail>
+    <header id="getVolume.header" />
+    <box color="gray">
+        <column>
+            <p id="getVolume.p.1" />
+            <p color="lime" id="getVolume.p.2" />
+        </column>
+    </box>
+</help-screen>

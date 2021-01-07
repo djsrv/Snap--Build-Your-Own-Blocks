@@ -1,0 +1,43 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportURL">
+                <l>snap.berkeley.edu</l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportURL.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportURL" bubble="1">
+                        <l>snap.berkeley.edu</l>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportURL_html.png" width="350" height="132" />
+                </bubbles>
+            </diagram>
+            <p id="reportURL.p.1" />
+            <diagram>
+                <script>
+                    <block s="reportTextSplit">
+                        <block s="reportURL" bubble="1">
+                            <l>snap.berkeley.edu</l>
+                        </block>
+                        <l><option>line</option></l>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportURL_list.png" width="144" height="136" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportURL.p.2" />
+        </column>
+    </box>
+</help-screen>

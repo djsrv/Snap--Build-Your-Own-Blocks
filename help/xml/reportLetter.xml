@@ -1,0 +1,59 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportLetter">
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="bubble" annotation="1">
+                        <block s="reportLetter">
+                            <l>1</l>
+                            <l>apple</l>
+                        </block>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportLetter.p.1" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="doSetVar" annotation="1">
+                        <l>counter</l>
+                        <l>1</l>
+                    </block>
+                    <block s="doRepeat" annotation="2">
+                        <block s="reportStringSize">
+                            <l>Mississippi</l>
+                        </block>
+                        <script>
+                            <block s="bubble" annotation="3">
+                                <block s="reportLetter">
+                                    <block var="counter" />
+                                    <l>Mississippi</l>
+                                </block>
+                                <l>1</l>
+                            </block>
+                            <block s="doChangeVar" annotation="4">
+                                <l>counter</l>
+                                <l>1</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportLetter.p.2" />
+                    <small-p id="reportLetter.p.3" />
+                    <small-p id="reportLetter.p.4" />
+                    <small-p id="reportLetter.p.5" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

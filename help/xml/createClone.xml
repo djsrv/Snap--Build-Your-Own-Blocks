@@ -1,0 +1,26 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="createClone">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <p id="createClone.p.1">
+                <img src="createClone_stop.png" width="32" height="18" />
+                </p>
+            <p id="createClone.p.2">
+                <script>
+                    <block s="receiveOnClone" />
+                </script>
+                </p>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="createClone.p.3" />
+        </column>
+    </box>
+</help-screen>

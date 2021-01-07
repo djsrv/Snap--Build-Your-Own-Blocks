@@ -1,0 +1,16 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="setVolume">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="setVolume.header" />
+    <box color="gray">
+        <column>
+            <p id="setVolume.p.1" />
+            <p color="lime" id="setVolume.p.2" />
+        </column>
+    </box>
+</help-screen>

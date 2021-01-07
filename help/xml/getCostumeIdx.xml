@@ -1,0 +1,50 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="getCostumeIdx" />
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doSwitchToCostume" annotation="1">
+                        <block s="reportRandom">
+                            <l>1</l>
+                            <l>2</l>
+                        </block>
+                    </block>
+                    <block s="doIf" annotation="2">
+                        <block s="reportEquals">
+                            <block s="getCostumeIdx" />
+                            <l>1</l>
+                        </block>
+                        <script>
+                            <block s="playSound" annotation="3">
+                                <l>meow</l>
+                            </block>
+                        </script>
+                    </block>
+                    <block s="doIf" annotation="4">
+                        <block s="reportEquals">
+                            <block s="getCostumeIdx" />
+                            <l>2</l>
+                        </block>
+                        <script>
+                            <block s="playSound" annotation="5">
+                                <l>bark</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="getCostumeIdx.p.1" />
+                    <small-p id="getCostumeIdx.p.2" />
+                    <small-p id="getCostumeIdx.p.3" />
+                    <small-p id="getCostumeIdx.p.4" />
+                    <small-p id="getCostumeIdx.p.5" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

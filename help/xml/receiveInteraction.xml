@@ -1,0 +1,37 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="receiveInteraction">
+                <l><option>clicked</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="receiveInteraction.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <menu>
+                    <item annotation="1">clicked</item>
+                    <item annotation="2">pressed</item>
+                    <item annotation="3">dropped</item>
+                    <item annotation="4">mouse-entered</item>
+                    <item annotation="5">mouse-departed</item>
+                    <item annotation="6">scrolled-up</item>
+                    <item>scrolled-down</item>
+                    <item annotation="7">stopped</item>
+                </menu>
+                <annotations>
+                    <small-p id="receiveInteraction.p.1" />
+                    <small-p id="receiveInteraction.p.2" />
+                    <small-p arrow-horizontal="true" id="receiveInteraction.p.3" />
+                    <small-p id="receiveInteraction.p.4" />
+                    <small-p id="receiveInteraction.p.5" />
+                    <small-p id="receiveInteraction.p.6" />
+                    <small-p id="receiveInteraction.p.7">
+                        <img src="receiveInteraction_stop.png" width="14" height="14" />
+                        </small-p>
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

@@ -1,0 +1,51 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="setXPosition">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <diagram rel-width="1">
+                <script>
+                    <block s="setXPosition" annotation="1">
+                        <l>0</l>
+                    </block>
+                    <block s="doWait" annotation="2">
+                        <l>1</l>
+                    </block>
+                    <block s="setXPosition" annotation="3">
+                        <l>240</l>
+                    </block>
+                    <block s="doWait" annotation="4">
+                        <l>1</l>
+                    </block>
+                    <block s="setXPosition" annotation="5">
+                        <l>-240</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="setXPosition.p.1" />
+                    <small-p id="setXPosition.p.2" />
+                    <small-p id="setXPosition.p.3" />
+                    <small-p id="setXPosition.p.4" />
+                    <small-p id="setXPosition.p.5" />
+                </annotations>
+            </diagram>
+            <img src="setXPosition_range.png" width="195" height="77" />
+        </row>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="setXPosition.p.6">
+                <script>
+                    <block s="setXPosition">
+                        <l />
+                    </block>
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

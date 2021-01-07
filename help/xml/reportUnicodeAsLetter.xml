@@ -1,0 +1,72 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportUnicodeAsLetter">
+                <l>65</l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportUnicodeAsLetter.header" />
+    <box color="gray">
+        <column>
+            <p id="reportUnicodeAsLetter.p.1" />
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicodeAsLetter" bubble="1">
+                            <l>65</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text id="A" />
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicodeAsLetter" bubble="1">
+                            <l>12069</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>⼥</text>
+                    </bubbles>
+                </diagram>
+            </row>
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicodeAsLetter" bubble="1">
+                            <l>960</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>π</text>
+                    </bubbles>
+                </diagram>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportUnicodeAsLetter" bubble="1">
+                            <l>9775</l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <text>☯</text>
+                    </bubbles>
+                </diagram>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <column rel-width="2">
+                <small-p id="reportUnicodeAsLetter.p.2" />
+                <small-p id="reportUnicodeAsLetter.p.3" />
+                <small-p id="reportUnicodeAsLetter.p.4" />
+            </column>
+            <column rel-width="5">
+                <p id="reportUnicodeAsLetter.p.5" />
+                <small-p id="reportUnicodeAsLetter.p.6" />
+            </column>
+        </row>
+    </box>
+</help-screen>

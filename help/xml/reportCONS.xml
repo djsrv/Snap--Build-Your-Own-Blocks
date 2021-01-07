@@ -1,0 +1,181 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="initials %'data'" type="reporter" category="operators">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%l" />
+            </inputs>
+            <script>
+                <block s="doIf" annotation="1">
+                    <block s="reportListIsEmpty">
+                        <block var="data" />
+                        <script>
+                            <block s="doReport">
+                                <block s="reportNewList">
+                                    <list />
+                                </block>
+                            </block>
+                        </script>
+                    </block>
+                    <block s="doReport">
+                        <block s="reportCONS">
+                            <block s="reportLetter">
+                                <l>1</l>
+                                <block s="reportListItem">
+                                    <l>1</l>
+                                    <block var="data" />
+                                </block>
+                            </block>
+                            <custom-block s="initials %l">
+                                <block s="reportCDR">
+                                    <block var="data" />
+                                </block>
+                            </custom-block>
+                        </block>
+                    </block>
+                </block>
+            </script>
+        </block-definition>
+        <block-definition s="some function %'data'" type="reporter" category="operators">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%s" />
+            </inputs>
+        </block-definition>
+        <block-definition s="recursive call %'data'" type="reporter" category="looks">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%l" />
+            </inputs>
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <script>
+            <block s="reportCONS">
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportCONS.header" />
+    <box color="gray">
+        <column>
+            <row>
+                <diagram rel-width="4">
+                    <script>
+                        <block s="reportCONS">
+                            <l annotation="2" />
+                            <l annotation="1" />
+                        </block>
+                    </script>
+                    <annotations>
+                        <small-p id="reportCONS.p.1" />
+                        <small-p id="reportCONS.p.2" />
+                    </annotations>
+                </diagram>
+                <diagram rel-width="5">
+                    <script>
+                        <block s="reportCONS" bubble="1">
+                            <l>7</l>
+                            <block s="reportNewList">
+                                <list>
+                                    <l>8</l>
+                                    <l>1</l>
+                                </list>
+                            </block>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportCONS_list1.png" width="80" height="70" />
+                    </bubbles>
+                </diagram>
+            </row>
+            <p id="reportCONS.p.3" />
+            <script>
+                <block s="doSetVar">
+                    <l>foo</l>
+                    <block s="reportNewList">
+                        <list>
+                            <l>8</l>
+                            <l>1</l>
+                        </list>
+                    </block>
+                </block>
+                <block s="doSetVar">
+                    <l>baz</l>
+                    <block s="reportCONS">
+                        <l>7</l>
+                        <block var="foo" />
+                    </block>
+                </block>
+            </script>
+            <diagram>
+                <script>
+                    <block s="reportIsIdentical" bubble="1">
+                        <block var="foo" />
+                        <block s="reportCDR">
+                            <block var="baz" />
+                        </block>
+                    </block>
+                </script>
+                <bubbles>
+                    <bool>true</bool>
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <diagram>
+                <block-definition s="initials %l" />
+                <annotations>
+                    <small-p id="reportCONS.p.4">
+                        <script>
+                            <block s="reportCONS">
+                                <l />
+                                <l />
+                            </block>
+                        </script>
+                        </small-p>
+                </annotations>
+            </diagram>
+            <script>
+                <block s="reportCONS">
+                    <custom-block s="some function %s">
+                        <block s="reportListItem">
+                            <l>1</l>
+                            <block var="foo" />
+                        </block>
+                    </custom-block>
+                    <custom-block s="recursive call %l">
+                        <block s="reportCDR">
+                            <block var="foo" />
+                        </block>
+                    </custom-block>
+                </block>
+            </script>
+            <diagram>
+                <script>
+                    <custom-block s="initials %l" bubble="1">
+                        <block s="reportNewList">
+                            <list>
+                                <l>Three</l>
+                                <l>Letter</l>
+                                <l>Acronym</l>
+                            </list>
+                        </block>
+                    </custom-block>
+                </script>
+                <bubbles>
+                    <img src="reportCONS_list2.png" width="80" height="70" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

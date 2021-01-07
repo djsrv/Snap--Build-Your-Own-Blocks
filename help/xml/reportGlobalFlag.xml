@@ -1,0 +1,38 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportGlobalFlag">
+                <l><option>turbo mode</option></l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportGlobalFlag.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportGlobalFlag">
+                        <l menu="1"><option>turbo mode</option></l>
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item>turbo mode</item>
+                        <item>flat line ends</item>
+                        <item>video capture</item>
+                        <item>mirror video</item>
+                    </menu>
+                </menus>
+            </diagram>
+            <p id="reportGlobalFlag.p.1">
+                <img src="doSetGlobalFlag_settings.png" width="42" height="24" />
+                </p>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportGlobalFlag.p.2" />
+            <i id="reportGlobalFlag.p.3" />
+        </column>
+    </box>
+</help-screen>

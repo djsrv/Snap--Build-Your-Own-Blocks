@@ -1,0 +1,131 @@
+<help-screen version="1">
+    <blocks>
+        <block-definition s="swap items %'index1' and %'index2' in %'list'" type="command" category="lists">
+            <header />
+            <code />
+            <translations />
+            <inputs>
+                <input type="%n" />
+                <input type="%n" />
+                <input type="%l" />
+            </inputs>
+            <script>
+                <block s="doDeclareVariables" annotation="1">
+                    <list annotation="2">
+                        <l>temp</l>
+                    </list>
+                </block>
+                <block s="doSetVar">
+                    <l>temp</l>
+                    <block s="reportListItem">
+                        <block var="index1" />
+                        <block var="list" />
+                    </block>
+                </block>
+                <block s="doReplaceInList">
+                    <block var="index1" />
+                    <block var="list" />
+                    <block s="reportListItem">
+                        <block var="index2" />
+                        <block var="list" />
+                    </block>
+                </block>
+                <block s="doReplaceInList">
+                    <block var="index2" />
+                    <block var="list" />
+                    <block var="temp" />
+                </block>
+            </script>
+        </block-definition>
+        <block-definition s="new counter" type="reporter" category="operators">
+            <header />
+            <code />
+            <translations />
+            <inputs />
+            <script>
+                <block s="doDeclareVariables">
+                    <list><l>count</l></list>
+                </block>
+                <block s="doSetVar">
+                    <l>count</l>
+                    <l>0</l>
+                </block>
+                <block s="doReport">
+                    <block s="reifyScript">
+                        <script>
+                            <block s="doChangeVar">
+                                <l>count</l>
+                                <l>1</l>
+                            </block>
+                            <block s="doReport">
+                                <block var="count" />
+                            </block>
+                        </script>
+                        <list />
+                    </block>
+                </block>
+            </script>
+        </block-definition>
+    </blocks>
+    <thumbnail>
+        <script>
+            <block s="doDeclareVariables">
+                <list><l>a</l></list>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <block-definition s="swap items %n and %n in %l" />
+                <annotations>
+                    <small-p id="doDeclareVariables.p.1">
+                        <script>
+                            <block var="temp" />
+                        </script>
+                        </small-p>
+                    <small-p id="doDeclareVariables.p.2" />
+                </annotations>
+            </diagram>
+	    <p id="doDeclareVariables.p.3" />
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <block-definition s="new counter" />
+            <column rel-width="1">
+                <p id="doDeclareVariables.p.4" />
+                <p id="doDeclareVariables.p.5">
+		  <script><block var="count" /></script>
+		  <script><custom-block s="new counter" /></script>
+		  </p>
+                <diagram>
+                    <script>
+                        <block s="doSetVar">
+                            <l>my counter</l>
+                            <custom-block s="new counter" />
+                        </block>
+                        <block s="doSayFor" annotation="1">
+                            <block s="evaluate">
+                                <block var="my counter" />
+                                <list />
+                            </block>
+                            <l>2</l>
+                        </block>
+                        <block s="doSayFor" annotation="2">
+                            <block s="evaluate">
+                                <block var="my counter" />
+                                <list />
+                            </block>
+                            <l>2</l>
+                        </block>
+                    </script>
+                    <annotations>
+                        <small-p arrow-reverse="true" id="doDeclareVariables.p.6" />
+                        <small-p arrow-reverse="true" id="doDeclareVariables.p.7" />
+                    </annotations>
+                </diagram>
+            </column>
+        </row>
+    </box>
+</help-screen>

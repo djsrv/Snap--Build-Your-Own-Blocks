@@ -1,0 +1,69 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doPlayNote">
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doRepeat" annotation="1">
+                        <l>3</l>
+                        <script>
+                            <block s="doPlayNote">
+                                <l>60</l>
+                                <l>0.5</l>
+                            </block>
+                            <block s="doPlayNote" annotation="2">
+                                <l>67</l>
+                                <l>0.5</l>
+                            </block>
+                            <block s="doPlayNote">
+                                <l>55</l>
+                                <l>0.5</l>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doPlayNote.p.1" />
+                    <small-p id="doPlayNote.p.2" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <script>
+                <block s="doPlayNote">
+                    <l>60</l>
+                    <l>0.5</l>
+                </block>
+            </script>
+            <row>
+                <img src="doPlayNote_piano.png" width="215" height="59" />
+                <small-p rel-width="1" id="doPlayNote.p.3" />
+            </row>
+            <diagram>
+                <script>
+                    <block s="doPlayNote" annotation="1">
+                        <l>60</l>
+                        <l>0.5</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doPlayNote.p.4" />
+                </annotations>
+            </diagram>
+            <p id="doPlayNote.p.5">
+                <script>
+                    <block s="doSetTempo" />
+                </script>
+            </p>
+        </column>
+    </box>
+</help-screen>

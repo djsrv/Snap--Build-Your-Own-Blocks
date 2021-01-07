@@ -1,0 +1,139 @@
+<help-screen version="1">
+    <thumbnail>
+        <row>
+            <script>
+                <block s="reifyScript">
+                    <script />
+                    <list />
+                </block>
+            </script>
+            <script>
+                <block s="reifyReporter">
+                    <script />
+                    <list />
+                </block>
+            </script>
+            <script>
+                <block s="reifyPredicate">
+                    <script />
+                    <list />
+                </block>
+            </script>
+        </row>
+    </thumbnail>
+    <header id="reify.header" />
+    <box color="gray">
+        <row>
+            <box color="blue" rel-width="46">
+                <column>
+                    <diagram>
+                        <script>
+                            <block s="reportSum" bubble="1">
+                                <l>2</l>
+                                <l>3</l>
+                            </block>
+                        </script>
+                        <bubbles>
+                            <text>5</text>
+                        </bubbles>
+                    </diagram>
+                    <diagram>
+                        <script>
+                            <block s="reifyReporter" bubble="1">
+                                <autolambda>
+                                    <block s="reportSum">
+                                        <l>2</l>
+                                        <l>3</l>
+                                    </block>
+                                </autolambda>
+                                <list />
+                            </block>
+                        </script>
+                        <bubbles>
+                            <script>
+                                <block s="reifyReporter" bubble="1">
+                                    <autolambda>
+                                        <block s="reportSum">
+                                            <l>2</l>
+                                            <l>3</l>
+                                        </block>
+                                    </autolambda>
+                                    <list />
+                                </block>
+                            </script>
+                        </bubbles>
+                    </diagram>
+                </column>
+            </box>
+            <column rel-width="54">
+                <diagram>
+                    <script>
+                        <block s="reifyScript">
+                            <script>
+                                <block s="down" />
+                                <block s="forward">
+                                    <l>10</l>
+                                </block>
+                            </script>
+                            <list />
+                        </block>
+                    </script>
+                </diagram>
+                <diagram>
+                    <script>
+                        <block s="reifyScript" annotation="1">
+                            <script annotation="2" />
+                            <list />
+                        </block>
+                    </script>
+                    <annotations>
+                        <small-p id="reify.p.1" />
+                        <small-p id="reify.p.2" />
+                    </annotations>
+                </diagram>
+            </column>
+        </row>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reify.p.3" />
+            <diagram>
+                <script>
+                    <block s="evaluate">
+                        <block s="reifyReporter">
+                            <script annotation="1" />
+                            <list />
+                        </block>
+                        <list>
+                            <l />
+                        </list>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reify.p.4" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="evaluate" bubble="1">
+                        <block s="reifyReporter">
+                            <autolambda>
+                                <block s="reportSum">
+                                    <l />
+                                    <l>3</l>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <list>
+                            <l>5</l>
+                        </list>
+                    </block>
+                </script>
+                <bubbles>
+                    <text>8</text>
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

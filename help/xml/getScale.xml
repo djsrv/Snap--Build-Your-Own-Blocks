@@ -1,0 +1,55 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="getScale" />
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <row>
+            <diagram>
+                <script>
+                    <block s="doForever">
+                        <script>
+                            <block s="doIf" annotation="1">
+                                <block s="reportGreaterThan">
+                                    <block s="getScale" />
+                                    <l>200</l>
+                                </block>
+                                <script>
+                                    <block s="setScale" annotation="2">
+                                        <l>100</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="getScale.p.1" />
+                    <small-p id="getScale.p.2" />
+                </annotations>
+            </diagram>
+        </row>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="getScale.p.3">
+                <script>
+                    <block s="getScale" />
+                </script>
+                </p>
+            <row>
+                <img src="getScale_watcher.png" width="108" height="21" />
+                <p rel-width="1" id="getScale.p.4">
+                    <row padding="5">
+                        <img src="checkbox.png" width="15" height="15" />
+                        <script>
+                            <block s="getScale" />
+                        </script>
+                    </row>
+                </p>
+            </row>
+            <p id="getScale.p.5" />
+        </column>
+    </box>
+</help-screen>

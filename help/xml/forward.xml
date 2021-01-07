@@ -1,0 +1,33 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="forward">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="forward" annotation="1">
+                        <l>10</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="forward.p.1" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="forward" annotation="1">
+                        <l>-10</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="forward.p.2" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

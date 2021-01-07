@@ -1,0 +1,51 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportKeyPressed">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doForever" annotation="1">
+                        <script>
+                            <block s="doIf">
+                                <block s="reportKeyPressed">
+                                    <l><option>space</option></l>
+                                </block>
+                                <script>
+                                    <block s="forward" annotation="2">
+                                        <l>2</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="reportKeyPressed.p.1" />
+                    <small-p id="reportKeyPressed.p.2" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportKeyPressed.p.3">
+                <script>
+                    <block s="reportKeyPressed">
+                        <l><option>space</option></l>
+                    </block>
+                </script>
+                <script>
+                    <block s="receiveKey">
+                        <l><option>space</option></l>
+                    </block>
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

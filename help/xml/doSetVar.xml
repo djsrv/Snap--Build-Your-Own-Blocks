@@ -1,0 +1,53 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doSetVar">
+                <l>variable</l>
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="receiveGo" annotation="1" />
+                    <block s="doSetVar" annotation="2">
+                        <l>score</l>
+                        <l>0</l>
+                    </block>
+                    <block s="doForever" annotation="3">
+                        <script>
+                            <block s="doFaceTowards" annotation="4">
+                                <l><option>mouse-pointer</option></l>
+                            </block>
+                            <block s="forward" annotation="5">
+                                <l>10</l>
+                            </block>
+                            <block s="doIf" annotation="6">
+                                <block s="reportTouchingObject">
+                                    <l>Sprite(2)</l>
+                                </block>
+                                <script>
+                                    <block s="doChangeVar" annotation="7">
+                                        <l>score</l>
+                                        <l>1</l>
+                                    </block>
+                                </script>
+                            </block>
+                        </script>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doSetVar.p.1" />
+                    <small-p id="doSetVar.p.2" />
+                    <small-p id="doSetVar.p.3" />
+                    <small-p id="doSetVar.p.4" />
+                    <small-p id="doSetVar.p.5" />
+                    <small-p id="doSetVar.p.6" />
+                    <small-p id="doSetVar.p.7" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

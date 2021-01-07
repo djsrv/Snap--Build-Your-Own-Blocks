@@ -1,0 +1,36 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="getLastMessage" />
+        </script>
+    </thumbnail>
+    <header id="getLastMessage.header" />
+    <box color="gray">
+        <column>
+            <script>
+                <block s="doBroadcast">
+                    <l>hi there</l>
+                </block>
+            </script>
+            <diagram>
+                <script>
+                    <block s="getLastMessage" bubble="1" />
+                </script>
+                <bubbles>
+                    <text id="hi there" />
+                </bubbles>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="getLastMessage.p.1">
+                <script>
+                    <block s="receiveMessage">
+                        <l><option>any message</option></l>
+                    </block>
+                </script>
+            </p>
+        </column>
+    </box>
+</help-screen>

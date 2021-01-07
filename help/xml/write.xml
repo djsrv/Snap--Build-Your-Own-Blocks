@@ -1,0 +1,33 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="write">
+                <l>Hello!</l>
+                <l>12</l>
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <script>
+                <block s="write">
+                    <l>Down a slippery slope.</l>
+                    <l>12</l>
+                </block>
+            </script>
+            <row>
+                <column rel-width="1">
+                    <p id="write.p.1" />
+                    <p font="Courier" id="write.p.2" />
+                </column>
+                <img src="write_down.png" width="274" height="124" />
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <img src="write_hello.png" width="57" height="38" />
+            <p id="write.p.3" />
+        </row>
+    </box>
+</help-screen>

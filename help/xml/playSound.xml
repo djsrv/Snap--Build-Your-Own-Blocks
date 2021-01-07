@@ -1,0 +1,54 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="playSound">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="receiveKey" annotation="1">
+                        <l><option>space</option></l>
+                    </block>
+                    <block s="playSound" annotation="2">
+                        <l>laugh</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="playSound.p.1" />
+                    <small-p id="playSound.p.2" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="playSound.p.3" />
+            <row>
+                <column rel-width="1">
+                    <img src="playSound_sounds_tab.png" width="140" height="70" />
+                    <p id="playSound.p.4" />
+                </column>
+                <column rel-width="1">
+                    <img src="playSound_record.png" width="142" height="63" />
+                    <p id="playSound.p.5">
+                        <img src="playSound_save_button.png" width="33" height="17" />
+                    </p>
+                </column>
+                <column rel-width="1">
+                    <diagram>
+                        <script>
+                            <block s="playSound">
+                                <l highlight="true">pop</l>
+                            </block>
+                        </script>
+                    </diagram>
+                    <p id="playSound.p.6" />
+                </column>
+            </row>
+        </column>
+    </box>
+</help-screen>

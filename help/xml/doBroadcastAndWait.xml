@@ -1,0 +1,74 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="doBroadcastAndWait">
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="doBroadcastAndWait" annotation="1">
+                        <l>jump</l>
+                    </block>
+                    <block s="bubble" annotation="2">
+                        <l>That was fun!</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doBroadcastAndWait.p.1" />
+                    <small-p id="doBroadcastAndWait.p.2" />
+                </annotations>
+            </diagram>
+            <diagram>
+                <script>
+                    <block s="receiveMessage" annotation="1">
+                        <l>jump</l>
+                    </block>
+                    <block s="changeYPosition" annotation="2">
+                        <l>50</l>
+                    </block>
+                    <block s="doWait">
+                        <l>1</l>
+                    </block>
+                    <block s="changeYPosition">
+                        <l>-50</l>
+                    </block>
+                </script>
+                <annotations>
+                    <small-p id="doBroadcastAndWait.p.3" />
+                    <small-p id="doBroadcastAndWait.p.4" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="doBroadcastAndWait.p.5">
+                <script>
+                    <block s="doBroadcastAndWait">
+                        <l />
+                    </block>
+                </script>
+                </p>
+            <diagram>
+                <script>
+                    <block s="doBroadcastAndWait">
+                        <l annotation="1" menu="1" />
+                    </block>
+                </script>
+                <menus>
+                    <menu>
+                        <item annotation="2">new...</item>
+                    </menu>
+                </menus>
+                <annotations>
+                    <small-p arrow-detour="10" id="doBroadcastAndWait.p.6" />
+                    <small-p id="doBroadcastAndWait.p.7" />
+                </annotations>
+            </diagram>
+        </column>
+    </box>
+</help-screen>

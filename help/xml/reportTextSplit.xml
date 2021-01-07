@@ -1,0 +1,89 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportTextSplit">
+                <l>hello world</l>
+                <l> </l>
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportTextSplit.header" />
+    <box color="gray">
+        <column>
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportTextSplit" bubble="1">
+                            <l>nowhere man</l>
+                            <l> </l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportTextSplit_list1.png" width="80" height="87" />
+                    </bubbles>
+                </diagram>
+                <p rel-width="1" id="reportTextSplit.p.1" />
+            </row>
+            <row>
+                <diagram rel-width="3">
+                    <script>
+                        <block s="reportTextSplit" bubble="1">
+                            <l>nowhere   man</l>
+                            <l><option>whitespace</option></l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportTextSplit_list2.png" width="80" height="69" />
+                    </bubbles>
+                </diagram>
+                <p rel-width="2" id="reportTextSplit.p.2" />
+            </row>
+            <row>
+                <diagram rel-width="1">
+                    <script>
+                        <block s="reportTextSplit" bubble="1">
+                            <l>Yakko</l>
+                            <l><option>letter</option></l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportTextSplit_list3.png" width="80" height="104" />
+                    </bubbles>
+                </diagram>
+                <p rel-width="1" id="reportTextSplit.p.3" />
+            </row>
+            <row>
+                <diagram rel-width="9">
+                    <script scale="0.9">
+                        <block s="reportTextSplit" bubble="1">
+                            <block s="reportURL">
+                                <l>snap.berkeley.edu</l>
+                            </block>
+                            <l><option>line</option></l>
+                        </block>
+                    </script>
+                    <bubbles>
+                        <img src="reportTextSplit_list4.png" width="145" height="137" />
+                    </bubbles>
+                </diagram>
+                <p rel-width="4" id="reportTextSplit.p.4" />
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <row>
+            <diagram rel-width="1">
+                <script>
+                    <block s="reportTextSplit" bubble="1">
+                        <l>banana</l>
+                        <l>an</l>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportTextSplit_list5.png" width="80" height="70" />
+                </bubbles>
+            </diagram>
+            <p rel-width="1" id="reportTextSplit.p.5" />
+        </row>
+    </box>
+</help-screen>

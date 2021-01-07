@@ -1,0 +1,99 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportIsIdentical">
+                <l />
+                <l />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportIsIdentical.header" />
+    <box color="gray">
+        <column>
+            <diagram>
+                <script>
+                    <block s="reportIsIdentical" bubble="1" annotation="1">
+                        <block s="reportNewList">
+                            <list>
+                                <l>a</l>
+                                <l>b</l>
+                            </list>
+                        </block>
+                        <block s="reportNewList">
+                            <list>
+                                <l>a</l>
+                                <l>b</l>
+                            </list>
+                        </block>
+                    </block>
+                </script>
+                <bubbles>
+                    <bool>false</bool>
+                </bubbles>
+                <annotations>
+                    <small-p id="reportIsIdentical.p.1" />
+                </annotations>
+            </diagram>
+            <row>
+                <column rel-width="1">
+                    <script>
+                        <block s="doSetVar">
+                            <l>foo</l>
+                            <block s="reportNewList">
+                                <list>
+                                    <l>a</l>
+                                    <l>b</l>
+                                </list>
+                            </block>
+                        </block>
+                        <block s="doSetVar">
+                            <l>baz</l>
+                            <block var="foo" />
+                        </block>
+                    </script>
+                    <diagram>
+                        <script>
+                            <block s="reportIsIdentical" bubble="1">
+                                <block var="foo" />
+                                <block var="baz" />
+                            </block>
+                        </script>
+                        <bubbles>
+                            <bool>true</bool>
+                        </bubbles>
+                    </diagram>
+                </column>
+                <column rel-width="1">
+                    <p id="reportIsIdentical.p.2" />
+                    <script>
+                        <block s="doReplaceInList">
+                            <l>2</l>
+                            <block var="foo" />
+                            <l>Hi!</l>
+                        </block>
+                    </script>
+                    <diagram>
+                        <script>
+                            <block var="baz" bubble="1" />
+                        </script>
+                        <bubbles>
+                            <img src="reportIsIdentical_list.png" width="80" height="69" />
+                        </bubbles>
+                    </diagram>
+                </column>
+            </row>
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportIsIdentical.p.3">
+                <script>
+                    <block s="reportIsIdentical">
+                        <l />
+                        <l />
+                    </block>
+                </script>
+                </p>
+        </column>
+    </box>
+</help-screen>

@@ -1,0 +1,103 @@
+<help-screen version="1">
+    <thumbnail>
+        <script>
+            <block s="reportAskFor">
+                <l />
+                <block s="reifyReporter">
+                    <script />
+                    <list />
+                </block>
+                <list />
+            </block>
+        </script>
+    </thumbnail>
+    <header id="reportAskFor.header" />
+    <box color="gray">
+        <column>
+            <p id="reportAskFor.p.1" />
+            <diagram>
+                <script>
+                    <block s="reportAskFor" bubble="1">
+                        <l>Sprite(3)</l>
+                        <block s="reifyReporter">
+                            <autolambda>
+                                <block s="reportNewList">
+                                    <list>
+                                        <block s="xPosition" />
+                                        <block s="yPosition" />
+                                    </list>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <list />
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportAskFor_list1.png" width="80" height="69" />
+                </bubbles>
+            </diagram>
+            <p id="reportAskFor.p.2" />
+            <diagram>
+                <script scale="0.9">
+                    <block s="reportMap" bubble="1">
+                        <block s="reifyReporter">
+                            <autolambda>
+                                <block s="reportAskFor">
+                                    <l highlight="true" />
+                                    <block s="reifyReporter">
+                                        <autolambda>
+                                            <block s="reportNewList">
+                                                <list>
+                                                    <block s="xPosition" />
+                                                    <block s="yPosition" />
+                                                </list>
+                                            </block>
+                                        </autolambda>
+                                        <list />
+                                    </block>
+                                    <list />
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <block s="reportGet">
+                            <l><option>other sprites</option></l>
+                        </block>
+                    </block>
+                </script>
+                <bubbles>
+                    <img src="reportAskFor_list2.png" width="129" height="52" />
+                </bubbles>
+            </diagram>
+            <p id="reportAskFor.p.3" />
+        </column>
+    </box>
+    <box color="blue">
+        <column>
+            <p id="reportAskFor.p.4" />
+            <diagram>
+                <script>
+                    <block s="reportAskFor">
+                        <l>Sprite(3)</l>
+                        <block s="reifyReporter">
+                            <autolambda>
+                                <block s="reportNewList">
+                                    <list>
+                                        <l arrow-end="1" />
+                                        <block var="its variable" />
+                                    </list>
+                                </block>
+                            </autolambda>
+                            <list />
+                        </block>
+                        <list>
+                            <block var="my variable" arrow-start="1" arrow-detour="20" />
+                        </list>
+                    </block>
+                </script>
+            </diagram>
+            <p id="reportAskFor.p.5" />
+        </column>
+    </box>
+</help-screen>
