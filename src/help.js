@@ -8,7 +8,7 @@
 
     Copyright (C) 2019 by Dylan Servilla
 
-    This file is part of Snap! Help Translator library.
+    This file is part of Snap!.
 
     Snap! is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -1524,7 +1524,7 @@ ScriptDiagramMorph.prototype.getAnnotatedMorph = function (attribute, id) {
 
 // DiagramArrowMorph ////////////////////////////////////////////////////
 
-// DiagramArrowMorph inherits from FrameMorph:
+// DiagramArrowMorph inherits from Morph:
 
 DiagramArrowMorph.prototype = new Morph();
 DiagramArrowMorph.prototype.constructor = DiagramArrowMorph;
