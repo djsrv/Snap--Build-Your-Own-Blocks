@@ -56,6 +56,7 @@ HelpScreenMorph.prototype.init = function (loadCallback) {
     HelpScreenMorph.uber.init.call(this);
     this.bounds.setWidth(HelpScreenMorph.prototype.screenWidth - this.padding);
     this.color = DialogBoxMorph.prototype.color;
+    this.acceptsDrops = false;
 };
 
 HelpScreenMorph.prototype.fixLayout = function () {
@@ -1209,6 +1210,7 @@ ScriptDiagramMorph.prototype.init = function (
     // initialize inherited properties:
     ScriptDiagramMorph.uber.init.call(this);
 
+    this.acceptsDrops = false;
     this.populateDiagram();
 };
 

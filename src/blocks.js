@@ -3566,6 +3566,8 @@ BlockMorph.prototype.showHelp = function (lang) {
         }
 
         var sf = new ScrollFrameMorph();
+        sf.acceptsDrops = false;
+        sf.contents.acceptsDrops = false;
         sf.contents.add(help);
         sf.setColor(DialogBoxMorph.prototype.color);
         sf.setHeight(Math.min(help.height(), 400));
