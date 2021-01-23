@@ -38,7 +38,7 @@ HelpScreenMorph.uber = FrameMorph.prototype;
 HelpScreenMorph.prototype.screenWidth = 572;
 HelpScreenMorph.prototype.padding = 15;
 HelpScreenMorph.prototype.verticalPadding = 10;
-HelpScreenMorph.prototype.font = 'Baskerville, "Libre Baskerville"';
+HelpScreenMorph.prototype.font = '"Times New Roman", Times, serif';
 
 // HelpScreenMorph instance creation:
 
@@ -348,7 +348,7 @@ SnapSerializer.prototype.loadHelpScreenElement = function (
             textFont = element.attributes.font;
         }
         textSize = contains(smallTextTags, element.tag)
-                        ? 14 : 18;
+                        ? 16 : 20;
         bold = contains(boldTextTags, element.tag);
         italic = contains(italicTextTags, element.tag);
         if (element.children.length === 0) {
