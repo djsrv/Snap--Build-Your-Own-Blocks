@@ -583,7 +583,7 @@ SnapTranslator.dict.en.help_strings = {
     'doSetGlobalFlag.p.2':
         '(Note: The particular settings available in the menu of this block are just the ones Jens has needed for some project of his. If you\'d like to be able to read and set all the settings in your project, load the \u201cProvide getters and setters for all GUI controls\u201d library.)',
     'doSetGlobalFlag.p.3':
-        '\u201cAnything you can do from the GUI, you should be able to do from the programming language, and vice versa.\u201d \u2014 Mike Eisenberg, d. 3/12/2019 RIP',
+        '\u201cAnything you can do from the GUI, you should be able to do from the programming language, and vice versa.\u201d\n\u2014 Mike Eisenberg, d. 3/12/2019 RIP',
 
     // doSetInstrument
     'doSetInstrument.header':
@@ -1439,7 +1439,7 @@ SnapTranslator.dict.en.help_strings = {
     'reportGlobalFlag.p.2':
         '(Note: The particular settings available in the menu of this block are just the ones Jens has needed for some project of his. If you\'d like to be able to read and set all the settings in your project, load the \u201cProvide getters and setters for all GUI controls\u201d library.)',
     'reportGlobalFlag.p.3':
-        '\u201cAnything you can do from the GUI, you should be able to do from the programming language, and vice versa.\u201d \u2014 Mike Eisenberg, d. 3/12/2019 RIP',
+        '\u201cAnything you can do from the GUI, you should be able to do from the programming language, and vice versa.\u201d\n\u2014 Mike Eisenberg, d. 3/12/2019 RIP',
 
     // reportGreaterThan
     'reportGreaterThan.p.1':
