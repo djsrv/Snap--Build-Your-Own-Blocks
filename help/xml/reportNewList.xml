@@ -58,14 +58,14 @@
         <column>
             <p id="reportNewList.p.4" />
             <row>
-                <diagram rel-width="1">
+                <diagram>
                     <script>
                         <block s="bubble">
                             <l highlight="true" />
                         </block>
                     </script>
                 </diagram>
-                <diagram rel-width="3">
+                <diagram>
                     <script>
                         <block s="bubble">
                             <block s="reportNewList">
@@ -92,14 +92,14 @@
             </row>
             <p id="reportNewList.p.5" />
             <row>
-                <diagram rel-width="1">
+                <diagram>
                     <script>
                         <block s="reportListLength">
                             <l highlight="true" />
                         </block>
                     </script>
                 </diagram>
-                <diagram rel-width="4">
+                <diagram>
                     <script>
                         <block s="reportListLength">
                             <block s="reportNewList">

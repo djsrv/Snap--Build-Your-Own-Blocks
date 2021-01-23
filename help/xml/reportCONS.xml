@@ -67,7 +67,7 @@
     <box color="gray">
         <column>
             <row>
-                <diagram rel-width="4">
+                <diagram>
                     <script>
                         <block s="reportCONS">
                             <l annotation="2" />
@@ -79,7 +79,7 @@
                         <small-p id="reportCONS.p.2" />
                     </annotations>
                 </diagram>
-                <diagram rel-width="5">
+                <diagram>
                     <script>
                         <block s="reportCONS" bubble="1">
                             <l>7</l>

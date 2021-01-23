@@ -10,7 +10,7 @@
     <box color="gray">
         <column>
             <row>
-                <diagram rel-width="2">
+                <diagram>
                     <script>
                         <block s="doStopThis" annotation="1">
                             <l menu="1" />
@@ -26,7 +26,7 @@
                         </menu>
                     </menus>
                 </diagram>
-                <column rel-width="3">
+                <column>
                     <small-p id="doStopThis.p.1">
                         <img src="doStopThis_stop.png" width="21" height="12" />
                         </small-p>

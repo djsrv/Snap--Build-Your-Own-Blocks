@@ -10,7 +10,7 @@
     <box color="gray">
         <column>
             <row>
-                <diagram rel-width="1">
+                <diagram>
                     <script>
                         <block s="reportGet" menu="1">
                             <l><option>neighbors</option></l>
@@ -45,10 +45,10 @@
                         </menu>
                     </menus>
                 </diagram>
-                <column rel-width="2">
+                <column>
                     <row>
                         <p color="lime" rel-width="1" id="reportGet.p.1" />
-                        <diagram rel-width="1">
+                        <diagram>
                             <script>
                                 <block s="reportGet" bubble="1">
                                     <l><option>self</option></l>
@@ -61,7 +61,7 @@
                     </row>
                     <row>
                         <p color="fuchsia" rel-width="1" id="reportGet.p.2" />
-                        <diagram rel-width="1">
+                        <diagram>
                             <script>
                                 <block s="reportGet" bubble="1">
                                     <l><option>rotation x</option></l>
@@ -74,7 +74,7 @@
                     </row>
                     <row>
                         <p color="cyan" rel-width="1" id="reportGet.p.3" />
-                        <diagram rel-width="1">
+                        <diagram>
                             <script>
                                 <block s="reportGet" bubble="1">
                                     <l><option>dangling?</option></l>
@@ -87,7 +87,7 @@
                     </row>
                     <row>
                         <p color="orange" rel-width="3" id="reportGet.p.4" />
-                        <diagram rel-width="5">
+                        <diagram>
                             <script>
                                 <block s="reportGet" bubble="1">
                                     <l><option>neighbors</option></l>
