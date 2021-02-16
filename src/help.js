@@ -1665,10 +1665,3 @@ BlockMorph.prototype.addDiagramHighlight = function (oldHighlight) {
 // ArgMorph /////////////////////////////////////////////////////////////
 
 ArgMorph.prototype.addDiagramHighlight = BlockMorph.prototype.addDiagramHighlight;
-ArgMorph.prototype.removeHighlight = BlockMorph.prototype.removeHighlight;
-ArgMorph.prototype.toggleHighlight = ArgMorph.prototype.toggleHighlight;
-ArgMorph.prototype.highlight = BlockMorph.prototype.highlight;
-ArgMorph.prototype.highlightImage = BlockMorph.prototype.highlightImage;
-ArgMorph.prototype.highlightImageBlurred =
-    BlockMorph.prototype.highlightImageBlurred;
-ArgMorph.prototype.getHighlight = BlockMorph.prototype.getHighlight;

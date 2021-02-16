@@ -7874,6 +7874,19 @@ ArgMorph.prototype.render = function (ctx) {
     ArgMorph.uber.render.call(this, ctx);
 };
 
+ArgMorph.prototype.removeHighlight = BlockMorph.prototype.removeHighlight;
+
+ArgMorph.prototype.toggleHighlight = ArgMorph.prototype.toggleHighlight;
+
+ArgMorph.prototype.highlight = BlockMorph.prototype.highlight;
+
+ArgMorph.prototype.highlightImage = BlockMorph.prototype.highlightImage;
+
+ArgMorph.prototype.highlightImageBlurred =
+    BlockMorph.prototype.highlightImageBlurred;
+
+ArgMorph.prototype.getHighlight = BlockMorph.prototype.getHighlight;
+
 // ArgMorph evaluation
 
 ArgMorph.prototype.isEmptySlot = function () {
